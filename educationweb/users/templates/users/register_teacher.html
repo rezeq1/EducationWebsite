@@ -1,7 +1,7 @@
 {% extends "users/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-<h2 class="account-heading">{{user.username }}</h2>
+<h2 class="account-heading">Welcome</h2>
     <div class="content-section">
         <form method="POST">
             {% csrf_token %}
