@@ -19,6 +19,11 @@ def parent_register(req):
         form=ParentRegisterForm()
     return render(req,'users/register.html',{'form':form})
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 937088d18948e906995ab3bf33b78af196b8d814
 def teacher_register(req):
     if req.method == 'POST':
         form=TeacherRegisterForm(req.POST)
@@ -28,7 +33,11 @@ def teacher_register(req):
             au.teacher_register(teacher)
             username=form.cleaned_data.get('username')
             messages.success(req,f'Your account has been created! you are now able to login ')
+<<<<<<< HEAD
             return redirect("login")
+=======
+            return render(req,'users/home.html')
+>>>>>>> 937088d18948e906995ab3bf33b78af196b8d814
     else:
 
         form=TeacherRegisterForm()
@@ -36,4 +45,9 @@ def teacher_register(req):
 
 
 def home(req):
+<<<<<<< HEAD
     return render(req,'users/home.html')
+=======
+    return render(req,'users/home.html')
+    
+>>>>>>> 937088d18948e906995ab3bf33b78af196b8d814
