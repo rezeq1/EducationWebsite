@@ -8,7 +8,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'python educationweb/manage.py runserver'
+                sh 'python educationweb/manage.py check'
             }
         }
         stage('Test') {
