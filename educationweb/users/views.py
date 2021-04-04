@@ -12,7 +12,7 @@ def parent_register(req):
             au.parent_register(parent)
             username=form.cleaned_data.get('username')
             messages.success(req,f'Your account has been created! you are now able to login ')
-            return render(req,'users/home.html')
+            return render(req,'users/login.html')
     else:
 
         form=ParentRegisterForm()
