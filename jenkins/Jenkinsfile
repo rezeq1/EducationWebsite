@@ -1,14 +1,18 @@
 pipeline {
     agent none
     stages {
-        stage('Build') {
+stage('Set Up Python virtual  environment') {
             agent {
                 docker {
                     image 'django'
                 }
             }
+            steps {
+                sh 'source educationweb/env/bin/activate'
+            }
             
         }
+
         stage('Test') {
             agent {
                 docker {

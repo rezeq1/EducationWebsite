@@ -17,3 +17,19 @@ class ParentRegisterForm(UserCreationForm):
          'first_name',
           'last_name', 'email', 
           'password1', 'password2', ] 
+
+
+class TeacherRegisterForm(UserCreationForm): 
+    first_name = forms.CharField(max_length=30, required=True) 
+    last_name = forms.CharField(max_length=30, required=True) 
+    username = forms.CharField(max_length=30, required=True)
+    password1 = forms.PasswordInput()
+    password2 = forms.PasswordInput() 
+    class Meta: 
+        model = Teacher 
+        fields = [ 'username',
+         'first_name',
+          'last_name',
+           'email', 
+          'password1',
+           'password2', ] 
