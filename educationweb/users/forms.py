@@ -12,6 +12,7 @@ class ParentRegisterForm(UserCreationForm):
     password2 = forms.PasswordInput() 
     class Meta: 
         model = Parent 
+        
         fields = [ 'username',
          'first_name',
           'last_name', 'email', 
