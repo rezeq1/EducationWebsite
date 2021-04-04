@@ -17,3 +17,8 @@ def parent_register(req):
 
         form=ParentRegisterForm()
     return render(req,'users/register.html',{'form':form})
+
+
+
+def teacher_register(req):
+    pass
