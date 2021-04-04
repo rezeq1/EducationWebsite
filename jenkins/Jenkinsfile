@@ -1,6 +1,16 @@
 pipeline {
     agent none
     stages {
+        stage('Build') {
+            agent {
+                docker {
+                    image 'django'
+                }
+            }
+            steps {
+                sh 'python educationweb/manage.py runserver'
+            }
+        }
         stage('Test') {
             agent {
                 docker {
