@@ -19,6 +19,7 @@ from users import views as user_views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
+    # a
     path('admin/', admin.site.urls),
     path('parent_register/',user_views.parent_register,name='parent_register'),
     path('teacher_register/',user_views.teacher_register,name='teacher_register'),
