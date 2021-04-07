@@ -4,7 +4,7 @@ pipeline {
 stage('Build') {
             agent {
                 docker {
-                    image 'izaldal/django:django'
+                    image 'amarhabneen/bm_team7'
                 }
             }
             steps {
@@ -16,7 +16,7 @@ stage('Build') {
         stage('Test') {
             agent {
                 docker {
-                    image 'izaldal/django:django'
+                    image 'amarhabneen/bm_team7'
                 }
             }
             steps {
