@@ -19,5 +19,4 @@ class AuthTestCase(TestCase):
         a.teacher_register(t)
         Tregisterd=Teacher.objects.filter(username='username').first()
         t.delete()
-        print('hhhhhhhh')
         self.assertIsNone(Tregisterd)
