@@ -1,5 +1,4 @@
 {% extends "users/base.html" %}
-{% load crispy_forms_tags %}
 {% block content %}
 <h2 class="account-heading">Welcome</h2>
     <div class="content-section">
@@ -8,7 +7,7 @@
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Join Tody</legend>
                 Create a new parent account :
-                {{ form | crispy }}
+                {{ form  }}
 
             </fieldset>
              <div class="form-group">
