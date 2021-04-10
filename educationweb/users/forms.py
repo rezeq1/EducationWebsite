@@ -58,3 +58,11 @@ class AddToKindergartenForm(forms.ModelForm):
     class Meta:      
         model = Kindergarten
         fields = ['kindergarten']
+
+class KindergartenRegisterForm(forms.ModelForm): 
+    name = forms.CharField(max_length=30, required=True) 
+    seatLimit = forms.IntegerField(required=True)
+
+    class Meta: 
+        model = Kindergarten 
+        fields = [ 'name','seatLimit',]

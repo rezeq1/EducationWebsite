@@ -33,6 +33,7 @@ urlpatterns = [
     path('Register_To_Kindergarten/<str:username>/',user_views.Register_To_Kindergarten,name='Register_To_Kindergarten'),
     path('home/delete_parent/',user_views.delete_parent,name='delete_parent'),
     path('home/delete_teacher/',user_views.delete_teacher,name='delete_teacher'),
+    path('Kindergarten_register/',user_views.Kindergarten_register,name='Kindergarten_register'),
 
     
 ]

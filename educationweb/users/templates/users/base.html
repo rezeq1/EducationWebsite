@@ -78,7 +78,7 @@
                         {% if HaveGarten %}
                         <li class="list-group-item list-group-item-light">     <h6> Your Kindergarten name : {{HaveGarten}}</h6> </li>
                         {% else %}
-                          <li class="list-group-item list-group-item-light">     <a href="#"> Create my Kindergarten</a> </li>
+                          <li class="list-group-item list-group-item-light">     <a href="{% url 'Kindergarten_register'%}"> Create my Kindergarten</a> </li>
 
                         {%endif%}
                         <li class="list-group-item list-group-item-light">    <a href="{% url 'delete_teacher'%}">remove  account</a> </li>
