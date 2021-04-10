@@ -164,3 +164,21 @@ def Kindergarten_register(req):
 
         form=KindergartenRegisterForm()
     return render(req,'users/register_kindergarten.html',{'form':form})
+
+
+@login_required
+def ChangePassword(req):
+    if req.method == 'POST':
+        form=ChangePasswordForm(req.POST)
+        if form.is_valid():
+            user=req.user
+            user2=form.save(commit=False)
+            password=form.cleaned_data.get('password1')
+            user.password=user2.password  
+            user.save()
+            messages.success(req,f'Your password has been changed!')
+            return home(req)
+
+    else: 
+        form=ChangePasswordForm()
+    return render(req,'users/ChangePassword.html',{'form':form})
