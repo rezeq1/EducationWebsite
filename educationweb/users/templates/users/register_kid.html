@@ -1,0 +1,25 @@
+{% extends "users/base.html" %}
+{% block content %}
+<h2 class="account-heading">Welcome</h2>
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Join Tody</legend>
+                Create a new kid account :
+                {{ form |linebreaks }}
+
+            </fieldset>
+             <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">sign up</button>
+             </div>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Already Have an Account?
+                <a href="#" class="ml-2">Sign in</a>
+            </small>
+        </div>
+    </div>
+{% endblock%}
+    
