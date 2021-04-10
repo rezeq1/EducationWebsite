@@ -30,4 +30,5 @@ urlpatterns = [
     path('login_teacher',auth_views.LoginView.as_view(template_name='users/login_teacher.html'),name='login_teacher'),  
     path('home/',user_views.home,name='home'),
     path('Register_To_Kindergarten/<str:username>/',user_views.Register_To_Kindergarten,name='Register_To_Kindergarten'),
+    path('delete_kid/<str:username>/',user_views.delete_kid,name='delete_kid'),
 ]
