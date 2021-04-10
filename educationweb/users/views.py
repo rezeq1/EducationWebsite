@@ -126,3 +126,15 @@ def delete_kid(req,username):
     messages.success(req,f'{username} account has been deleted!')
 
     return home(req)
+
+
+
+@login_required
+def delete_parent(req):
+    username=req.user.username
+    Parent.delete(req.user)
+    messages.success(req,f'{username} account has been deleted!')
+
+    return redirect('login')
+
+    
