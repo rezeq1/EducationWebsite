@@ -1,0 +1,38 @@
+{% extends "users/base.html" %}
+{% block content %}
+<table class="table table-striped">
+    
+<thead>
+    <tr>
+        <th scope="col">Name </th>
+        <th scope="col">Age </th>
+        <th scope="col">Kindergarten</th>
+        <th scope="col">Register to a Kindergarten</th>
+    </tr>
+</thead>
+<tbody>
+{% for kid in kids %}
+<tr>
+    <td>{{kid.first_name}}</td>
+
+    <td>{{kid.age}}</td>
+
+    {% if kid.garten %}
+        <td>{{kid.garten.name}}</td>
+        {% else %}
+        <td>Empty</td>
+    {%endif%}
+
+
+    {% if kid.garten %}
+        <td style="color:red">Allready registerd</td> 
+        {% else %}
+        <td><a class="btn" style="color:blue" href="#">Register </a></td>
+    {%endif%}
+
+
+  </tr>
+{%endfor%}
+</tbody>
+</table>
+{%endblock%}
