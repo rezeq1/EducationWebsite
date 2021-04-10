@@ -66,3 +66,13 @@ class KindergartenRegisterForm(forms.ModelForm):
     class Meta: 
         model = Kindergarten 
         fields = [ 'name','seatLimit',]
+
+
+class ChangePasswordForm(UserCreationForm):
+
+    password1 = forms.PasswordInput()
+    password2 = forms.PasswordInput() 
+
+    class Meta: 
+        model = User 
+        fields = [ 'password1','password2',]
