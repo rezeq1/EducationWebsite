@@ -137,4 +137,10 @@ def delete_parent(req):
 
     return redirect('login')
 
-    
+@login_required
+def delete_teacher(req):
+    username=req.user.username
+    Teacher.delete(req.user)
+    messages.success(req,f'{username} account has been deleted!')
+
+    return redirect('login')
