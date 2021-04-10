@@ -11,5 +11,7 @@ class auth:
         Kid.delete(kid)
     def delete_Parent(req,parent):
         Parent.delete(parent)
+    def delete_Teacher(req,teacher):
+        Teacher.delete(teacher)
     def kid_login(req,kid):
         return kid in Kid.objects.all()
