@@ -25,3 +25,11 @@ class Kindergarten(models.Model):
     def __str__(this):
         return this.name
 
+class Kid(User):
+    age=models.IntegerField()
+    myParent=models.ForeignKey(Parent,on_delete=models.CASCADE)
+    garten=models.ForeignKey(Kindergarten, blank=True, null=True,on_delete=models.SET_NULL) 
+    class Meta:
+        verbose_name_plural = "Kid"
+        
+
