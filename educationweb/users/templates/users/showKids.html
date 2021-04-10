@@ -27,7 +27,7 @@
     {% if kid.garten %}
         <td style="color:red">Allready registerd</td> 
         {% else %}
-        <td><a class="btn" style="color:blue" href="#">Register </a></td>
+        <td><a class="btn" style="color:blue" href="{% url 'Register_To_Kindergarten' username=kid.username %}">Register </a></td>
     {%endif%}
 
 

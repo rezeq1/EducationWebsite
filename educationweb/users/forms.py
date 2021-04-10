@@ -51,3 +51,10 @@ class KidRegisterForm(UserCreationForm):
            'email', 
           'password1',
            'password2', ] 
+
+
+class AddToKindergartenForm(forms.ModelForm):
+    kindergarten = forms.ModelChoiceField(queryset=Kindergarten.objects.all())
+    class Meta:      
+        model = Kindergarten
+        fields = ['kindergarten']
