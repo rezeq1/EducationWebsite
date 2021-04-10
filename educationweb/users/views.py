@@ -41,3 +41,22 @@ def teacher_register(req):
 
 def home(req):
     return render(req,'users/home.html')
+
+def kid_register(req):
+    if req.method == 'POST':
+        form=KidRegisterForm(req.POST)
+        if form.is_valid():
+
+            username=form.cleaned_data.get('username')
+            parent=Parent.objects.filter(username=req.user.username).first()
+            kid=form.save(commit=False)
+            kid.myParent=parent
+            kid.save()
+            
+            messages.success(req,f'Your son account has been created! you are now able to register him to a kindergarten ')
+            return   render(req,'users/parent_home.html',{'user':req.user,'parent':True,'teacher':False,'kid':False})
+
+    else:
+
+        form=KidRegisterForm()
+    return render(req,'users/register_kid.html',{'form':form})
