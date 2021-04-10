@@ -28,6 +28,7 @@ urlpatterns = [
     path('logout/',auth_views.LogoutView.as_view(template_name='users/logout.html'),name='logout'),
     path('',auth_views.LoginView.as_view(template_name='users/login.html'),name='login'),
     path('login_teacher',auth_views.LoginView.as_view(template_name='users/login_teacher.html'),name='login_teacher'),  
+    path('login_kid',auth_views.LoginView.as_view(template_name='users/login.html'),name='login_kid'),  
     path('home/',user_views.home,name='home'),
     path('Register_To_Kindergarten/<str:username>/',user_views.Register_To_Kindergarten,name='Register_To_Kindergarten'),
     path('home/delete_parent/',user_views.delete_parent,name='delete_parent'),
