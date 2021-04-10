@@ -16,3 +16,12 @@ class Teacher(User):
         verbose_name_plural = "Teacher" 
     def __str__(this):
         return this.username
+
+
+class Kindergarten(models.Model):
+    seatLimit=models.IntegerField()
+    name=models.CharField(max_length=100,primary_key=True)
+    myTeacher = models.OneToOneField(Teacher,  on_delete=models.CASCADE, primary_key=False)
+    def __str__(this):
+        return this.name
+
