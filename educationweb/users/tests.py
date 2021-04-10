@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase,Client
 from .models import *
 from .auth import *
 # Create your tests here.
@@ -21,14 +21,7 @@ class AuthTestCase(TestCase):
         t.delete()
         self.assertIsNotNone(Tregisterd)
     
-    def test_2(self):
-        self.assertTrue(True)
-    
-    def test_3(self):
-        self.assertTrue(False)
-    
-    def test_4(self):
-        self.assertTrue(True)
-
-    def test_5(self):
-        self.assertTrue(True)
+    def test_teacher_login(self):
+        client=Client()
+        res=client.get('/login_teacher')
+        self.assertEqual(res.status_code,200)
