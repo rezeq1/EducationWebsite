@@ -62,8 +62,6 @@
               <p class='text-muted'>
                 <ul class="list-group">
 
-                  <li class="list-group-item list-group-item-light">    <a href="#"> Change my password</a> </li>
-
                       {% if parent %}
                       <li class="list-group-item list-group-item-light">     <a href="delete_parent"> remove  account</a>
                       </li>
@@ -71,6 +69,8 @@
                       <li class="list-group-item list-group-item-light">    <a href="{% url 'kid_register'%}">Add a Kid</a> </li>
 
                       <li class="list-group-item list-group-item-light">    <a href="{% url 'show_kids'%}">Show my kids</a> </li>
+                      
+                      <li class="list-group-item list-group-item-light">    <a href="{% url 'ChangePassword'%}"> Change my password</a> </li>
 
                       {%endif%}
 
@@ -82,7 +82,7 @@
 
                         {%endif%}
                         <li class="list-group-item list-group-item-light">    <a href="{% url 'delete_teacher'%}">remove  account</a> </li>
-
+                        
 
                   {%endif%}
 
