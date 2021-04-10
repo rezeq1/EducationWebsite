@@ -15,3 +15,6 @@ class auth:
         Teacher.delete(teacher)
     def kid_login(req,kid):
         return kid in Kid.objects.all()
+    def parent_change_password(req,newpassword,parent):
+        parent.password = newpassword
+        parent.save()
