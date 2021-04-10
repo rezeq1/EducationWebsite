@@ -64,10 +64,9 @@
 
                   <li class="list-group-item list-group-item-light">    <a href="#"> Change my password</a> </li>
 
-                  {% if parent or teacher%}
-                      <li class="list-group-item list-group-item-light">     <a href="#"> delete my account</a>
-                      </li>
                       {% if parent %}
+                      <li class="list-group-item list-group-item-light">     <a href="delete_parent"> remove  account</a>
+                      </li>
 
                       <li class="list-group-item list-group-item-light">    <a href="{% url 'kid_register'%}">Add a Kid</a> </li>
 
@@ -83,7 +82,6 @@
 
                         {%endif%}
 
-                      {%endif%}
 
                   {%endif%}
 
