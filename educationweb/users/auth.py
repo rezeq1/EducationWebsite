@@ -7,3 +7,5 @@ class auth:
         teacher.save()
     def kid_register(self,kid):
         kid.save()
+    def delete_kid(req,kid):
+        User.delete(kid)

@@ -19,7 +19,7 @@ from users import views as user_views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    
+    path('delete_kid/<str:username>/',user_views.delete_kid,name='delete_kid'),
     path('admin/', admin.site.urls),
     path('parent_register/',user_views.parent_register,name='parent_register'),
     path('teacher_register/',user_views.teacher_register,name='teacher_register'),
@@ -30,5 +30,5 @@ urlpatterns = [
     path('login_teacher',auth_views.LoginView.as_view(template_name='users/login_teacher.html'),name='login_teacher'),  
     path('home/',user_views.home,name='home'),
     path('Register_To_Kindergarten/<str:username>/',user_views.Register_To_Kindergarten,name='Register_To_Kindergarten'),
-    path('delete_kid/<str:username>/',user_views.delete_kid,name='delete_kid'),
+    
 ]
