@@ -144,3 +144,23 @@ def delete_teacher(req):
     messages.success(req,f'{username} account has been deleted!')
 
     return redirect('login')
+
+@login_required
+def Kindergarten_register(req):
+    if req.method == 'POST':
+        form=KindergartenRegisterForm(req.POST)
+        if form.is_valid():
+
+            name=form.cleaned_data.get('name')
+            seatLimit=form.cleaned_data.get('seatLimit')
+            teacher=Teacher.objects.filter(username=req.user.username).first()
+            Kindergarten_obj=Kindergarten(name=name,seatLimit=seatLimit,myTeacher=teacher)
+            Kindergarten_obj.myTeacher=teacher
+            Kindergarten_obj.save()
+
+            messages.success(req,f'Your kindergarten has been created!')
+            return home(req)
+    else:
+
+        form=KindergartenRegisterForm()
+    return render(req,'users/register_kindergarten.html',{'form':form})
