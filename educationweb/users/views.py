@@ -117,3 +117,12 @@ def Register_To_Kindergarten(req,username):
 
         form=AddToKindergartenForm()
     return render(req,'users/Kindergarten_Register.html',{'form':form ,'name':username})
+
+
+@login_required
+def delete_kid(req,username):
+    kid=User.objects.filter(username=username).first()
+    User.delete(kid)
+    messages.success(req,f'{username} account has been deleted!')
+
+    return home(req)
