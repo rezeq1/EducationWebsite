@@ -8,4 +8,6 @@ class auth:
     def kid_register(self,kid):
         kid.save()
     def delete_kid(req,kid):
-        User.delete(kid)
+        Kid.delete(kid)
+    def delete_Parent(req,parent):
+        Parent.delete(parent)
