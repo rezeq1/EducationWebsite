@@ -28,5 +28,15 @@ class AuthTestCase(TestCase):
         client=Client()
         res=client.get('/login_kid')
         self.assertEqual(res.status_code,200)
+    
+    def test_remove_parent(self):
+        a=auth()
+        p=Parent(password='123456',username='username',first_name='user',last_name='last',email='email@email')
+        a.parent_register(p)
+        a.delete_Parent(p)
+        deletedP=Parent.objects.filter(username='username').first()
+        self.assertIsNone(deletedP)
+
+
 
     
