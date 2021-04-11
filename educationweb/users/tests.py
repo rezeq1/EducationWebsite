@@ -92,6 +92,16 @@ class AuthTestCase(TestCase):
         k.add_kid(kid)
         garten=kid.garten
         self.assertIsNotNone(garten)
+    
+    def test_parent_change_password(self):
+        parent=Parent(password='123456',username='username',first_name='user',last_name='last',email='email@email')
+        a=auth()
+        a.change_password('abcdef',parent)
+        self.assertTrue(parent.check_password('abcdef'))
+
+    
+
+    
 
 
 
