@@ -76,3 +76,11 @@ class ChangePasswordForm(UserCreationForm):
     class Meta: 
         model = User 
         fields = [ 'password1','password2',]
+
+
+class RequestPasswordForm(forms.Form):
+    email = forms.EmailField(max_length=254,required=True ) 
+    username = forms.CharField(max_length=30, required=True)
+    class Meta: 
+        model = User 
+        fields = [ 'username', 'email',  ]
