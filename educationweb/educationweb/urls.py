@@ -35,6 +35,7 @@ urlpatterns = [
     path('home/delete_parent/',user_views.delete_parent,name='delete_parent'),
     path('home/delete_teacher/',user_views.delete_teacher,name='delete_teacher'),
     path('Kindergarten_register/',user_views.Kindergarten_register,name='Kindergarten_register'),
+    
     path('ChangePassword/',user_views.ChangePassword,name='ChangePassword'),
 
     
