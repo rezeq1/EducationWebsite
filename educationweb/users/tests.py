@@ -25,6 +25,11 @@ class AuthTestCase(TestCase):
         res=client.get('/login_teacher')
         self.assertEqual(res.status_code,200)
     
+    def test_parent_login(self):
+        client=Client()
+        res=client.get('/')
+        self.assertEqual(res.status_code,200)
+
     def test_kid_login(self):
         client=Client()
         res=client.get('/login_kid')
@@ -108,6 +113,8 @@ class AuthTestCase(TestCase):
         a.kid_register(k)
         a.change_password('abcdef',k)
         self.assertTrue(k.check_password('abcdef'))
+
+    
 
 
     
