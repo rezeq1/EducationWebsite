@@ -76,6 +76,22 @@ class AuthTestCase(TestCase):
         k.create(t)
         kregisterd=Kindergarten.objects.filter(name='test').first()
         self.assertIsNotNone(kregisterd)
+    
+    def test_add_kid(self):
+        a=auth()
+        p=Parent(password='123456',username='username',first_name='user',last_name='last',email='email@email')
+        a.parent_register(p)
+        kid=Kid(password='123456',username='kidtest',first_name='user',age=5,last_name='last',email='email@email')
+        kid.myParent=p
+        a.kid_register(kid)
+        t=Teacher(password='123456',username='teacer',first_name='user',last_name='last',email='email@email')
+        a.teacher_register(t)
+        Kk=Kindergarten(name='test',seatLimit=20)
+        k=Kindergarten_methods(Kk)
+        k.create(t)
+        k.add_kid(kid)
+        garten=kid.garten
+        self.assertIsNotNone(garten)
 
 
 
