@@ -36,6 +36,8 @@ urlpatterns = [
     path('home/delete_teacher/',user_views.delete_teacher,name='delete_teacher'),
     path('Kindergarten_register/',user_views.Kindergarten_register,name='Kindergarten_register'),
     path('password-reset/',user_views.Reset_Password,name='password_reset'),
+    path('password-reset/',user_views.Reset_Password,name='password_reset'),
+   path('password-reset-confirm/<str:username>/',user_views.Reset_Password_confirm,name='password_reset_confirm'),
    
     path('ChangePassword/',user_views.ChangePassword,name='ChangePassword'),
 
