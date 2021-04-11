@@ -194,10 +194,27 @@ def Reset_Password_confirm(req,username):
             user.save()
 
 
-            
+
             messages.success(req,f'Your password has been changed!')
             return redirect('login')
 
     else: 
         form=ChangePasswordForm()
     return render(req,'users/ChangePassword.html',{'form':form})
+
+def Reset_Password(req):
+    if req.method == 'POST':
+        form=RequestPasswordForm(req.POST)
+        form.is_valid()
+        username=form.cleaned_data.get('username')
+        email=form.cleaned_data.get('email')
+        user=User.objects.filter(username=username,email=email).first()
+        if user:
+            return redirect("password_reset_confirm",username=username)
+        messages.warning(req,f'Worng Details !')
+        return render(req,'users/password_reset.html',{'form':form })
+
+    else:
+
+        form=RequestPasswordForm()
+    return render(req,'users/password_reset.html',{'form':form })
