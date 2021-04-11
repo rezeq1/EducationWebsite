@@ -1,6 +1,7 @@
 from django.test import TestCase,Client
 from .models import *
 from .auth import *
+from .Kindergarten_methods import *
 # Create your tests here.
 class AuthTestCase(TestCase):
     def test_parent_register(self):
@@ -65,6 +66,16 @@ class AuthTestCase(TestCase):
         a.delete_kid(k)
         Kregisterd=Kid.objects.filter(username='kidtest').first()
         self.assertIsNone(Kregisterd)
+
+    def test_register_kindergarten(self):
+        a=auth()
+        t=Teacher(password='123456',username='username',first_name='user',last_name='last',email='email@email')
+        a.teacher_register(t)
+        Kk=Kindergarten(name='test',seatLimit=20)
+        k=Kindergarten_methods(Kk)
+        k.create(t)
+        kregisterd=Kindergarten.objects.filter(name='test').first()
+        self.assertIsNotNone(kregisterd)
 
 
 
