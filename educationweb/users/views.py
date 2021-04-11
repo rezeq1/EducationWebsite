@@ -182,11 +182,17 @@ def ChangePassword(req):
         form=ChangePasswordForm()
     return render(req,'users/ChangePassword.html',{'form':form})
 
+
 def Reset_Password_confirm(req,username):
     if req.method == 'POST':
         form=ChangePasswordForm(req.POST)
         if form.is_valid():
-            
+            user=User.objects.filter(username=username).first()
+            user2=form.save(commit=False)
+            password=form.cleaned_data.get('password1')
+            user.password=user2.password  
+            user.save()
+            messages.success(req,f'Your password has been changed!')
             return redirect('login')
 
     else: 
