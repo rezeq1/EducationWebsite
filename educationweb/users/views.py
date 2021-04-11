@@ -3,7 +3,7 @@ from .auth import auth
 from .forms import *
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
+from .Kindergarten_methods import *
 # Create your views here.
 
 def parent_register(req):
@@ -104,8 +104,8 @@ def Register_To_Kindergarten(req,username):
 
             if Num_kids < kindergarten.seatLimit :
                 kid=Kid.objects.filter(username=username).first()
-                kid.garten=kindergarten
-                kid.save()
+                model=Kindergarten_methods(kindergarten)
+                model.add_kid(kid)
                 messages.success(req,f'Your kid {username} has been added to a kindergarten !')
                 return home(req)
             else:
@@ -155,9 +155,8 @@ def Kindergarten_register(req):
             seatLimit=form.cleaned_data.get('seatLimit')
             teacher=Teacher.objects.filter(username=req.user.username).first()
             Kindergarten_obj=Kindergarten(name=name,seatLimit=seatLimit,myTeacher=teacher)
-            Kindergarten_obj.myTeacher=teacher
-            Kindergarten_obj.save()
-
+            model=Kindergarten_methods(Kindergarten_obj)
+            model.create(teacher)
             messages.success(req,f'Your kindergarten has been created!')
             return home(req)
     else:
@@ -174,8 +173,8 @@ def ChangePassword(req):
             user=req.user
             user2=form.save(commit=False)
             password=form.cleaned_data.get('password1')
-            user.password=user2.password  
-            user.save()
+            model=auth()
+            model.change_password(password,user)
             messages.success(req,f'Your password has been changed!')
             return home(req)
 
