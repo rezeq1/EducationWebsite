@@ -21,6 +21,8 @@ class AuthTestCase(TestCase):
         t.delete()
         self.assertIsNotNone(Tregisterd)
     
+
+    
     def test_teacher_login(self):
         client=Client()
         res=client.get('/login_teacher')
