@@ -99,7 +99,16 @@ class AuthTestCase(TestCase):
         a.change_password('abcdef',parent)
         self.assertTrue(parent.check_password('abcdef'))
 
-    
+    def test_kid_change_password(self):
+        a=auth()
+        p=Parent(password='123456',username='username',first_name='user',last_name='last',email='email@email')
+        a.parent_register(p)
+        k=Kid(password='123456',username='kidtest',first_name='user',age=5,last_name='last',email='email@email')
+        k.myParent=p
+        a.kid_register(k)
+        a.change_password('abcdef',k)
+        self.assertTrue(k.check_password('abcdef'))
+
 
     
 
