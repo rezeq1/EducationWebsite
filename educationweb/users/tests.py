@@ -37,6 +37,18 @@ class AuthTestCase(TestCase):
         deletedP=Parent.objects.filter(username='username').first()
         self.assertIsNone(deletedP)
 
+    def test_remove_kid(self):
+        a=auth()
+        p=Parent(password='123456',username='username',first_name='user',last_name='last',email='email@email')
+        a.parent_register(p)
+        k=Kid(password='123456',username='kidtest',first_name='user',age=5,last_name='last',email='email@email')
+        k.myParent=p
+        a.kid_register(k)
+        Kregisterd=Kid.objects.filter(username='kidtest').first()
+        self.assertIsNotNone(Kregisterd)
+
+
+
 
 
     
