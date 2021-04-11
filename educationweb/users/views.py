@@ -167,7 +167,6 @@ def Kindergarten_register(req):
 
 @login_required
 def ChangePassword(req):
-    
     if req.method == 'POST':
         form=ChangePasswordForm(req.POST)
         if form.is_valid():
