@@ -192,6 +192,9 @@ def Reset_Password_confirm(req,username):
             password=form.cleaned_data.get('password1')
             user.password=user2.password  
             user.save()
+
+
+            
             messages.success(req,f'Your password has been changed!')
             return redirect('login')
 
