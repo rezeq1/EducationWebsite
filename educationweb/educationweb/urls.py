@@ -34,13 +34,15 @@ urlpatterns = [
     path('Register_To_Kindergarten/<str:username>/',user_views.Register_To_Kindergarten,name='Register_To_Kindergarten'),
     path('home/delete_parent/',user_views.delete_parent,name='delete_parent'),
     path('home/delete_teacher/',user_views.delete_teacher,name='delete_teacher'),
-    path('Kindergarten_register/',user_views.Kindergarten_register,name='Kindergarten_register'),
-    path('password-reset/',user_views.Reset_Password,name='password_reset'),
-    
-   path('password-reset-confirm/<str:username>/',user_views.Reset_Password_confirm,name='password_reset_confirm'),
-   
+    path('Kindergarten_register/',user_views.Kindergarten_register,name='Kindergarten_register'),   
     path('ChangePassword/',user_views.ChangePassword,name='ChangePassword'),
 
-    
+
+    path('password-reset/',auth_views.PasswordResetView.as_view(template_name='users/password_reset.html'),name='password_reset'),
+    path('password-reset-confirm/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name='users/password_reset_confirm.html'),name='password_reset_confirm'),
+
+    path('password-reset/done/',auth_views.PasswordResetDoneView.as_view(template_name='users/password_reset_done.html'),name='password_reset_done'),
+    path('password-reset-complete/',auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'),name='password_reset_complete'),
+    path('activate/<uidb64>/<token>/',user_views.activate, name='activate'),
 ]
  

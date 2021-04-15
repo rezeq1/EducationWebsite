@@ -1,10 +1,24 @@
 from django.shortcuts import render,redirect
 from .auth import auth
 from .forms import *
+from .models import *
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .Kindergarten_methods import *
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import EmailMessage
+from django.http import HttpResponse
+from django.shortcuts import render
+from django.template.loader import render_to_string
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 # Create your views here.
+
+
+UserModel = get_user_model()
 
 def parent_register(req):
     if req.method == 'POST':
@@ -20,25 +34,6 @@ def parent_register(req):
 
         form=ParentRegisterForm()
     return render(req,'users/register.html',{'form':form})
-
-
-
-
-def teacher_register(req):
-    if req.method == 'POST':
-        form=TeacherRegisterForm(req.POST)
-        if form.is_valid():
-            au=auth()
-            teacher=form.save(commit=False)
-            au.teacher_register(teacher)
-            username=form.cleaned_data.get('username')
-            messages.success(req,f'Your account has been created! you are now able to login ')
-            return redirect("login")
-
-    else:
-
-        form=TeacherRegisterForm()
-    return render(req,'users/register_teacher.html',{'form':form})
 
 
 @login_required
@@ -172,12 +167,13 @@ def ChangePassword(req):
         if form.is_valid():
             user=req.user
             user2=form.save(commit=False)
+            oldpassword=form.cleaned_data.get('password')
             password=form.cleaned_data.get('password1')
             model=auth()
-            model.change_password(password,user)
-            messages.success(req,f'Your password has been changed!')
-            return home(req)
-
+            if  model.change_password(oldpassword,password,user):
+                messages.success(req,f'Your password has been changed!')
+                return home(req)
+            messages.warning(req,f'Incorrect old password !')
     else: 
         form=ChangePasswordForm()
     return render(req,'users/ChangePassword.html',{'form':form})
@@ -218,3 +214,52 @@ def Reset_Password(req):
 
         form=RequestPasswordForm()
     return render(req,'users/password_reset.html',{'form':form })
+
+def teacher_register(req):
+    if req.method == 'POST':
+        form=TeacherRegisterForm(req.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.is_active = False
+            user.save()
+            current_site = get_current_site(req)
+            mail_subject = 'Requeדsr for a new teacher account'
+            message = render_to_string('users/account_active_email.html', {
+                'user': user,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                'token': default_token_generator.make_token(user),
+            })
+            to_email = "education.web.reset@gmail.com"
+            email = EmailMessage(
+                mail_subject, message, to=[to_email] 
+            )
+            email.send()
+            messages.success(req,f'Your request has been sent to admin , check your email for admin response')
+            return redirect('login')
+
+    else:
+
+        form=TeacherRegisterForm()
+    return render(req,'users/register_teacher.html',{'form':form})
+
+def activate(req, uidb64, token):
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = UserModel._default_manager.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None and default_token_generator.check_token(user, token):
+        user.is_active = True
+        user.save()
+        current_site = get_current_site(req)
+        mail_subject = 'Registration completed'
+        message = 'Admin activated your account'
+        to_email = user.email
+        email = EmailMessage(
+             mail_subject, message, to=[to_email]
+        )
+        email.send()
+        return HttpResponse('Teacher account has been activated')
+    else:
+        return HttpResponse('Activation link is invalid!')

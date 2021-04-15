@@ -1,0 +1,11 @@
+{% autoescape off %}  
+A new Teacher has register with details :
+Username: {{ user.username }} 
+First Name: {{ user.first_name }}
+Last Name: {{ user.last_name }}
+Email: {{ user.email }}
+Click on the link to confirm the registration,
+http://{{ domain }}{% url 'activate' uidb64=uid token=token %}  
+If you don't want to confirm the registration, then just ignore this email.  
+{% endautoescape %}
+
