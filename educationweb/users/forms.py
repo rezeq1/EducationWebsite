@@ -2,11 +2,17 @@ from django import forms
 from django.contrib.auth.models import User 
 from django.contrib.auth.forms import UserCreationForm 
 from .models import * 
+from django.core.exceptions import ValidationError 
+
+
+def validate_email(value):
+    if User.objects.filter(email = value).exists():
+        raise ValidationError((f"{value} is taken."),params = {'value':value})
 
 class ParentRegisterForm(UserCreationForm): 
     first_name = forms.CharField(max_length=30, required=True) 
     last_name = forms.CharField(max_length=30, required=True) 
-    email = forms.EmailField(max_length=254,required=True ) 
+    email = forms.EmailField(max_length=254,required=True,validators = [validate_email] ) 
     username = forms.CharField(max_length=30, required=True)
     password1 = forms.PasswordInput()
     password2 = forms.PasswordInput() 
@@ -22,6 +28,7 @@ class ParentRegisterForm(UserCreationForm):
 class TeacherRegisterForm(UserCreationForm): 
     first_name = forms.CharField(max_length=30, required=True) 
     last_name = forms.CharField(max_length=30, required=True) 
+    email = forms.EmailField(max_length=254,required=True,validators = [validate_email] ) 
     username = forms.CharField(max_length=30, required=True)
     password1 = forms.PasswordInput()
     password2 = forms.PasswordInput() 
@@ -39,6 +46,7 @@ class KidRegisterForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True) 
     last_name = forms.CharField(max_length=30, required=True) 
     username = forms.CharField(max_length=30, required=True)
+    email = forms.EmailField(max_length=254,required=True,validators = [validate_email] ) 
     age = forms.IntegerField(required=True)
     password1 = forms.PasswordInput()
     password2 = forms.PasswordInput() 

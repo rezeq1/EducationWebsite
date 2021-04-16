@@ -15,6 +15,7 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
+from django.contrib.auth import update_session_auth_hash
 # Create your views here.
 
 
@@ -171,6 +172,7 @@ def ChangePassword(req):
             password=form.cleaned_data.get('password1')
             model=auth()
             if  model.change_password(oldpassword,password,user):
+                update_session_auth_hash(req, req.user)
                 messages.success(req,f'Your password has been changed!')
                 return home(req)
             messages.warning(req,f'Incorrect old password !')
