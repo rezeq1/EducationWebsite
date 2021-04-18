@@ -1,4 +1,6 @@
 """
+
+
 ASGI config for educationweb project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.

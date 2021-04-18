@@ -5,6 +5,7 @@ class Parent(User):
 
     class Meta:
         verbose_name_plural = "Parent" 
+   
     def __str__(this):
         return this.username
 

@@ -3,6 +3,8 @@ from .models import *
 from .auth import *
 from .Kindergarten_methods import *
 # Create your tests here.
+
+
 class AuthTestCase(TestCase):
     def test_parent_register(self):
         a=auth()

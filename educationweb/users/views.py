@@ -181,6 +181,7 @@ def ChangePassword(req):
     return render(req,'users/ChangePassword.html',{'form':form})
 
 
+
 def Reset_Password_confirm(req,username):
     if req.method == 'POST':
         form=ChangePasswordForm(req.POST)
