@@ -16,7 +16,7 @@ stage('Build') {
         stage('Test') {
             agent {
                 docker {
-                    image 'amarhabneen/bm_team7'
+                    image 'docker'
                 }
             }
             steps {
