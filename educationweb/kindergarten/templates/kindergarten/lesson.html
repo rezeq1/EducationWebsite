@@ -1,0 +1,44 @@
+
+{% extends "users/base.html" %}
+{% block content %}
+<div class="content-section">
+ 
+    <video class="embed-responsive embed-responsive-16by9" type="video/mp4" preload="auto" controls="controls" >
+        <source src="{{lesson.video_file.url}}" type="video/mp4" />
+        </video>
+    <h3 class="mt-2 mb-2">{{lesson.title}}</h3>
+    {{lesson.video_file.url}}
+    <p>
+
+    {{lesson.desc}}
+    </p>
+
+    {% for qustion in qustions %}
+    <article class="media content-section">
+          <div class="media-body">
+          <legend class="border-bottom ">
+             <small class="text-muted">{{ qustion.qustion }}</small>
+             </legend>
+            </br>
+            1)<small class="text-muted">{{ qustion.answer1  }}</small>
+            </br>
+            2)<small class="text-muted">{{ qustion.answer2 }}</small>
+            </br>
+            3)<small class="text-muted">{{ qustion.answer3 }}</small>
+            </br>
+            4)<small class="text-muted">{{ qustion.answer4 }}</small>
+            </br>
+            right answer: <small class="text-muted">{{ qustion.rightAnswer }}</small>
+            <legend class="border-bottom "></legend>
+          </div>
+        </article>
+    
+    
+    
+    
+    
+    
+    {% endfor %}
+    
+</div>
+{%endblock%}

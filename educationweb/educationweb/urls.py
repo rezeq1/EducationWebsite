@@ -46,5 +46,8 @@ urlpatterns = [
     path('activate/<uidb64>/<token>/',user_views.activate, name='activate'),
     path('show_kids/delete_parent/',user_views.delete_parent,name='delete_parent'),
     path('',include('kindergarten.urls'))
-]+ static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
- 
+]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
