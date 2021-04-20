@@ -16,9 +16,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from users import views as user_views
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('delete_kid/<str:username>/',user_views.delete_kid,name='delete_kid'),
@@ -43,5 +45,6 @@ urlpatterns = [
     path('password-reset-complete/',auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'),name='password_reset_complete'),
     path('activate/<uidb64>/<token>/',user_views.activate, name='activate'),
     path('show_kids/delete_parent/',user_views.delete_parent,name='delete_parent'),
-]
+    path('',include('kindergarten.urls'))
+]+ static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
  
