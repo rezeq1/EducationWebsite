@@ -49,7 +49,6 @@ def add_Qustion(req,id=None):
                 quiz_id=form.data['quiz_id']
                 id=quiz_id
                 quiz=Quiz.objects.filter(id=quiz_id).first()
-                print(quiz_id)
                 g=garten()
                 g.addQustion(q,quiz)
                 messages.success(req,f'The qustion has been uploaded')
