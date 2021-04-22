@@ -9,6 +9,8 @@ class LessonForm(forms.ModelForm):
         fields=['title','video_file','desc']
 
 class QustionForm(forms.ModelForm):
+    CHOICES = (('1', ' 1'),(' 2', ' 2'),(' 3', ' 3'),(' 4', ' 4'))
+    rightAnswer = forms.ChoiceField(choices=CHOICES)
     class Meta:
         model=Qustion
         fields=['qustion','answer1','answer2','answer3','answer4','rightAnswer']
