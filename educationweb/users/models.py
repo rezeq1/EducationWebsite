@@ -32,5 +32,11 @@ class Kid(User):
     garten=models.ForeignKey(Kindergarten, blank=True, null=True,on_delete=models.SET_NULL) 
     class Meta:
         verbose_name_plural = "Kid"
-        
+
+class Rate(models.Model):
+    son = models.ForeignKey(Kid, blank=True, null=True,on_delete=models.SET_NULL)
+    score=models.IntegerField()
+    
+    class Meta:
+        verbose_name_plural = "Rate"
 
