@@ -16,6 +16,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.contrib.auth import update_session_auth_hash
+from django.http import JsonResponse
 # Create your views here.
 
 
@@ -266,3 +267,28 @@ def activate(req, uidb64, token):
         return HttpResponse('Teacher account has been activated')
     else:
         return HttpResponse('Activation link is invalid!')
+
+@login_required
+def show_rate(req,username):
+    kid=Kid.objects.filter(username=username).first()
+    rate = Rate.objects.filter(son=kid).first()
+    return render(req,'users/show_rate.html',{'kid':kid,'rate':rate})
+
+def rate_garten(request):
+
+    if request.method == 'POST': 
+        score = request.POST.get('score')
+        sonName = request.POST.get('sonName')
+        son = Kid.objects.filter(username=sonName).first()
+        rate = Rate.objects.filter(son=son).first()
+        if not rate :
+            obj = Rate()
+            obj.son = son
+            obj.score = score
+            obj.save()
+        else:
+            rate.score = score
+            rate.save()
+
+        return JsonResponse({'success':'true', 'score': score}, safe=False)
+    return JsonResponse({'success':'false'})
