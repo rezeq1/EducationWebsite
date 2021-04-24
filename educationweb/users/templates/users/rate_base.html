@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- custom css & js -->
+    <link rel="stylesheet" href="{% static 'users\style.css' %}">
+    <script src="{% static 'users\main.js' %}" defer></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'users\bootstrap.css' %}">
+    {% if title%}
+    <title>{{title}}</title>
+    {% endif %}</head>
+<body>
+    
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Menu</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+              </li>
+              
+                {% else %}
+              <li>
+                <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+              </li>
+            <li>
+                <a class="nav-item nav-link" href="{% url 'parent_register' %}">Register as Parent</a>
+              </li>
+              <li>
+                <a class="nav-item nav-link" href="{% url 'teacher_register' %}">Register as Teacher </a>
+              </li>
+              
+                {% endif %}
+             
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <main role="main" class="container">
+        <div class="row">
+          <div class="col-md-8">
+            {% if messages %}
+            {% for message in messages %}
+               <div class="alert alert-{{message.tags}}">
+                    {{message}}
+               </div>
+            {% endfor%}
+            {% endif %}
+          </div>
+          {% if user.is_authenticated %}
+          <div class="col-md-4">
+            <div class="content-section">
+              <h3>Your Sidebar</h3>
+              <p class='text-muted'>
+                <ul class="list-group">
+
+                      {% if parent %}
+                      <li class="list-group-item list-group-item-light">     <a href="delete_parent"> remove  account</a>
+                      </li>
+
+                      <li class="list-group-item list-group-item-light">    <a href="{% url 'kid_register'%}">Add a Kid</a> </li>
+
+                      <li class="list-group-item list-group-item-light">    <a href="{% url 'show_kids'%}">Show my kids</a> </li>
+                      
+                      <li class="list-group-item list-group-item-light">    <a href="{% url 'ChangePassword'%}"> Change my password</a> </li>
+
+                      <li class="list-group-item list-group-item-light">    <a href="{% url 'show_rate'%}">Rate son's Kindergarten</a> </li>
+
+                      {%endif%}
+
+                      {% if teacher %}
+                        {% if HaveGarten %}
+                        <li class="list-group-item list-group-item-light">     <h6> Your Kindergarten name : {{HaveGarten}}</h6> </li>
+                        {% else %}
+                          <li class="list-group-item list-group-item-light">     <a href="{% url 'Kindergarten_register'%}"> Create my Kindergarten</a> </li>
+
+                        {%endif%}
+                        <li class="list-group-item list-group-item-light">    <a href="{% url 'delete_teacher'%}">remove  account</a> </li>
+                        
+
+                  {%endif%}
+                  {%if kid%}
+                      <li class="list-group-item list-group-item-light">  <a href="{% url 'ChangePassword'%}"> Change my password</a> </li>
+                  {%endif%}
+
+                </ul>
+              </p>
+            </div>
+          </div>
+          {%endif%}
+        </div>
+      </main>
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+      <div class="container mt-3">
+        {% block content %}
+        {% endblock content %}
+    </div>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

@@ -1,0 +1,41 @@
+
+{% extends "users/rate_base.html" %}
+{% block content %}
+<div class="content-section">
+
+<h3>kid name :{{kid.username}}</h3><br>
+<h3>kid age : {{kid.age}}</h3><br>
+<h3>kid Kindergarten : {{kid.garten.name}}</h3><br>
+
+
+<script>
+    localStorage.setItem("kid", "{{kid.username}}");
+</script>
+
+{% if not rate %}
+
+<h3>Rate <b style="color:rgb(233, 66, 0)">{{kid.username}}'s</b> kindergarten :</h3>
+
+    <div class="row">
+        <div class="col text-center">
+            <form class="rate-form" action="" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="fa fa-star fa-3x my-btn" id="first"></button>
+                <button type="submit" class="fa fa-star fa-3x my-btn" id="second"></button>
+                <button type="submit" class="fa fa-star fa-3x my-btn" id="third"></button>
+                <button type="submit" class="fa fa-star fa-3x my-btn" id="fourth"></button>
+                <button type="submit" class="fa fa-star fa-3x my-btn" id="fifth"></button>
+            </form>
+            <br>
+            
+            <div id="confirm-box"></div>
+        </div>
+        
+    </div>
+    </div>
+    {% else %}
+    <h3>Your rate for <b style="color:rgb(233, 66, 0)">{{kid.garten.name}}</b> kindergarten : {{rate.score}}</h3>
+{% endif %}
+
+
+{% endblock content %}
