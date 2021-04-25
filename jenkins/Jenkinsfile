@@ -8,7 +8,8 @@ stage('Build') {
                 }
             }
             steps {
-                sh 'python educationweb/manage.py test --keepdb'
+                sh 'cd educationweb/'
+                sh 'python manage.py test --keepdb'
             }
             
         }
