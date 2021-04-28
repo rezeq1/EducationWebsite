@@ -34,7 +34,7 @@ class Kid(User):
         verbose_name_plural = "Kid"
 
 class Rate(models.Model):
-    son = models.ForeignKey(Kid, blank=True, null=True,on_delete=models.SET_NULL)
+    son = models.ForeignKey(Kid, blank=True, null=True,on_delete=models.CASCADE)
     score=models.IntegerField()
     
     class Meta:
