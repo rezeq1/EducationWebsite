@@ -292,3 +292,32 @@ def rate_garten(request):
 
         return JsonResponse({'success':'true', 'score': score}, safe=False)
     return JsonResponse({'success':'false'})
+
+
+@login_required
+def Change_Kindergarten(req,username):
+    if req.method == 'POST':
+        form=AddToKindergartenForm(req.POST)
+        if form.is_valid():
+            kindergarten=form.cleaned_data.get('kindergarten')
+            Num_kids=len(kindergarten.kid_set.all())
+            kid=Kid.objects.filter(username=username).first()
+
+            if kid.garten == kindergarten:
+                messages.warning(req,f'Your kid {username} stayed in her kindergarten !')
+                return home(req)
+
+            if Num_kids < kindergarten.seatLimit :
+                model=Kindergarten_methods(kindergarten)
+                model.Change_Kindergarten(kid)
+                messages.success(req,f'Your kid {username} has been changed her kindergarten !')
+                return home(req)
+            else:
+                form=AddToKindergartenForm()
+                messages.warning(req,f'Kindergarten is full!')
+                return render(req,'users/Kindergarten_Register.html',{'form':form ,'name':username})
+
+    else:
+
+        form=AddToKindergartenForm()
+    return render(req,'users/Kindergarten_Register.html',{'form':form ,'name':username})
