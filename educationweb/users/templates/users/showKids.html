@@ -6,9 +6,9 @@
     <tr>
         <th scope="col">Name </th>
         <th scope="col">Age </th>
-        <th scope="col">Kindergarten</th>
+        <th scope="col">Kindergarten name</th>
         <th scope="col">Remove</th>
-        <th scope="col">Register to a Kindergarten</th>
+        <th scope="col">Kindergarten</th>
         <th scope="col">Trace</th>
     </tr>
 </thead>
@@ -26,7 +26,7 @@
     {%endif%}
     <td><a href="{% url 'delete_kid' username=kid.username %}" style="color:blue" class="btn">Remove</a></td>
     {% if kid.garten %}
-        <td style="color:red">Allready registerd</td>
+        <td><a class="btn" style="color:red" href="{% url 'Change_Kindergarten' username=kid.username %}">Change </a></td>
         <td><a href="{% url 'TraceKid' username=kid.username %}" style="color:blue" class="btn">Trace</a></td>
         {% else %}
         <td><a class="btn" style="color:blue" href="{% url 'Register_To_Kindergarten' username=kid.username %}">Register </a></td>
