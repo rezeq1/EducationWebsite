@@ -137,6 +137,28 @@ class AuthTestCase(TestCase):
         k2.Change_Kindergarten(kid)
         self.assertTrue(kid.garten==Kk2)
 
+    def test_Change_Kindergarten_2(self):
+        a=auth()
+        p=Parent(password='123456',username='username',first_name='user',last_name='last',email='email@email')
+        kid=Kid(password='123456',username='kidtest',first_name='user',age=5,last_name='last',email='email@email')
+        t1=Teacher(password='123456',username='teacher1',first_name='user1',last_name='last1',email='email1@email')
+        t2=Teacher(password='123456',username='teacher2',first_name='user2',last_name='last2',email='email2@email')
+        Kk1=Kindergarten(name='test1',seatLimit=20)
+        Kk2=Kindergarten(name='test2',seatLimit=20)
+
+        a.parent_register(p)
+        kid.myParent=p
+        a.kid_register(kid)
+        a.teacher_register(t1)
+        a.teacher_register(t2)
+        k1=Kindergarten_methods(Kk1)
+        k1.create(t1)
+        k1.add_kid(kid)
+        k2=Kindergarten_methods(Kk2)
+        k2.create(t2)
+        k2.Change_Kindergarten(kid)
+
+        self.assertTrue(kid.garten==Kk2)
     
 
 
