@@ -8,7 +8,7 @@
         <th scope="col">Age </th>
         <th scope="col">Parent first name </th>
         <th scope="col">Parent last name </th>
-        <th scope="col">Kick</th>
+        <th scope="col">Kick kid</th>
     </tr>
 </thead>
 <tbody>
@@ -22,10 +22,12 @@
 
     <td>{{kid.myParent.last_name}}</td>
 
-    <td><a href="{% url 'kick_kid' username=kid.username %}" style="color:red" class="btn">kick</a></td>
 
-  </tr>
-{%endfor%}
-</tbody>
+    <td>
+        <a  href="{% url 'kick_kid' username=kid.username %}" style="color:blue" class="btn">kick kid</a>
+    </td>
+</tr>
+ {%endfor%}
+ </tbody>
 </table>
 {%endblock%}
