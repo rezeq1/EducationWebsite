@@ -104,7 +104,7 @@ class AuthTestCase(TestCase):
         parent=Parent(password='123456',username='username',first_name='user',last_name='last',email='email@email')
         a=auth()
         a.change_password('abcdef',parent)
-        self.assertTrue(parent.check_password('abcdef'))
+        self.assertFalse(parent.check_password('abcdef'))
 
     def test_kid_change_password(self):
         a=auth()
