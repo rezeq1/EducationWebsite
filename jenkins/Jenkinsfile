@@ -1,7 +1,7 @@
 pipeline {
     agent none
     stages {
-stage('Build') {
+stage('Test') {
             agent {
                 docker {
                     image 'amarhabneen/bm_team7'
@@ -17,16 +17,6 @@ stage('Build') {
             
         }
 
-        stage('Test') {
-            agent {
-                docker {
-                    image 'docker'
-                }
-            }
-            steps {
-                sh 'python educationweb/manage.py test --keepdb'
-                
-            }
-        }
+
     }
 }
