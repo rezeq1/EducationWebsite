@@ -78,6 +78,8 @@
                       {% if teacher %}
                         {% if HaveGarten %}
                         <li class="list-group-item list-group-item-light">     <h6> Your Kindergarten name : {{HaveGarten}}</h6> </li>
+                        <li class="list-group-item list-group-item-light"> <a href="{% url 'show_kindergarten_kids'%}"> Show Kindergarten's kids</a> </li>
+
                         {% else %}
                           <li class="list-group-item list-group-item-light">     <a href="{% url 'Kindergarten_register'%}"> Create my Kindergarten</a> </li>
 
