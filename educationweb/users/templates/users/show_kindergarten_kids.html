@@ -1,0 +1,31 @@
+{% extends "users/base.html" %}
+{% block content %}
+<table class="table table-striped">
+    
+<thead>
+    <tr>
+        <th scope="col">First name </th>
+        <th scope="col">Age </th>
+        <th scope="col">Parent first name </th>
+        <th scope="col">Parent last name </th>
+        <th scope="col">Kick</th>
+    </tr>
+</thead>
+<tbody>
+{% for kid in kids %}
+<tr>
+    <td>{{kid.first_name}}</td>
+
+    <td>{{kid.age}}</td>
+
+    <td>{{kid.myParent.first_name}}</td>
+
+    <td>{{kid.myParent.last_name}}</td>
+
+    <td><a href="{% url 'kick_kid' username=kid.username %}" style="color:red" class="btn">kick</a></td>
+
+  </tr>
+{%endfor%}
+</tbody>
+</table>
+{%endblock%}
