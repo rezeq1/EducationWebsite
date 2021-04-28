@@ -5,6 +5,9 @@ class Kindergarten_methods():
         self.kindergarten.myTeacher=teacher
         self.kindergarten.save()
 
+    def Change_Kindergarten(self,kid):
+        kid.garten=self.kindergarten
+        kid.save()
 
         
     def add_kid(self,kid):
