@@ -328,3 +328,11 @@ def show_kindergarten_kids(req):
     garten=Kindergarten.objects.filter(myTeacher=req.user).first()
     kids=garten.kid_set.all()
     return render(req,'users/show_kindergarten_kids.html',{'kids':kids})
+
+@login_required
+def kick_kid(req,username):
+    kid=Kid.objects.filter(username=username).first()
+    model=Kindergarten_methods(None)
+    model.Kick_From_Kindergarten(kid)
+    messages.success(req,f'kid {username} has been kicked')
+    return home(req)
