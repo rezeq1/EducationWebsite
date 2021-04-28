@@ -48,7 +48,7 @@ urlpatterns = [
     path('rates/<str:username>/',user_views.show_rate,name='TraceKid'),
     path('rate/',user_views.rate_garten , name='rate-view'),
     path('Change_Kindergarten/<str:username>/',user_views.Change_Kindergarten,name='Change_Kindergarten'),
-
+    path('show_kindergarten_kids/',user_views.show_kindergarten_kids,name='show_kindergarten_kids'),
     path('',include('kindergarten.urls'))
 ]
 
