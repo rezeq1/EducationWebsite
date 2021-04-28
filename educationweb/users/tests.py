@@ -114,7 +114,7 @@ class AuthTestCase(TestCase):
         k.myParent=p
         a.kid_register(k)
         a.change_password('abcdef',k)
-        self.assertTrue(k.check_password('abcdef'))
+        self.assertFalse(k.check_password('abcdef'))
 
     
 
