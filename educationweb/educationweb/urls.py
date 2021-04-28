@@ -47,6 +47,7 @@ urlpatterns = [
     path('show_kids/delete_parent/',user_views.delete_parent,name='delete_parent'),
     path('rates/<str:username>/',user_views.show_rate,name='TraceKid'),
     path('rate/',user_views.rate_garten , name='rate-view'),
+    path('Change_Kindergarten/<str:username>/',user_views.Change_Kindergarten,name='Change_Kindergarten'),
 
     path('',include('kindergarten.urls'))
 ]
