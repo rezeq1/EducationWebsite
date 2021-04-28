@@ -321,3 +321,10 @@ def Change_Kindergarten(req,username):
 
         form=AddToKindergartenForm()
     return render(req,'users/Kindergarten_Register.html',{'form':form ,'name':username})
+
+
+@login_required
+def show_kindergarten_kids(req):
+    garten=Kindergarten.objects.filter(myTeacher=req.user).first()
+    kids=garten.kid_set.all()
+    return render(req,'users/show_kindergarten_kids.html',{'kids':kids})
