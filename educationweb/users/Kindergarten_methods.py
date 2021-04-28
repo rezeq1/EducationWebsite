@@ -13,4 +13,8 @@ class Kindergarten_methods():
     def add_kid(self,kid):
         kid.garten=self.kindergarten
         kid.save()
+
+    def Kick_From_Kindergarten(self,kid):
+        kid.garten.kid_set.remove(kid)
+
     
