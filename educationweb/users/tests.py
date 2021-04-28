@@ -103,7 +103,7 @@ class AuthTestCase(TestCase):
     def test_parent_change_password(self):
         parent=Parent(password='123456',username='username',first_name='user',last_name='last',email='email@email')
         a=auth()
-        a.change_password('abcdef',parent)
+        a.change_password('123456','abcdef',parent)
         self.assertFalse(parent.check_password('abcdef'))
 
     def test_kid_change_password(self):
@@ -113,7 +113,7 @@ class AuthTestCase(TestCase):
         k=Kid(password='123456',username='kidtest',first_name='user',age=5,last_name='last',email='email@email')
         k.myParent=p
         a.kid_register(k)
-        a.change_password('abcdef',k)
+        a.change_password('123456','abcdef',k)
         self.assertFalse(k.check_password('abcdef'))
 
     
