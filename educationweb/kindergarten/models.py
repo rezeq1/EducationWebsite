@@ -22,6 +22,17 @@ class lesson(models.Model):
     quiz=models.OneToOneField(Quiz, on_delete=models.CASCADE)
 
  
+class Story(models.Model):
+    title=models.CharField(default='Story',max_length=50)
+    garten=models.ForeignKey(Kindergarten, blank=True, null=True,on_delete=models.SET_NULL)
+
+class StoryPage(models.Model):
+    page=models.ImageField(upload_to='stories')
+    story=models.ForeignKey(Story,related_name='pages', blank=True, null=True,on_delete=models.SET_NULL)
+
+
+
+
 
 
     

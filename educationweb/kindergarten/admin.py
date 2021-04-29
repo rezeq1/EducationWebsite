@@ -4,4 +4,6 @@ from .models import *
 admin.site.register(Quiz)
 admin.site.register(lesson)
 admin.site.register(Qustion)
+admin.site.register(Story)
+admin.site.register(StoryPage)
 

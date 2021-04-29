@@ -1,5 +1,5 @@
 from django import forms 
-from .models import lesson,Qustion
+from .models import lesson,Qustion,Story,StoryPage
 class LessonForm(forms.ModelForm):
     video_file = forms.FileField(required=False)
     desc = forms.CharField (widget=forms.Textarea,required=False) 
@@ -14,4 +14,14 @@ class QustionForm(forms.ModelForm):
     class Meta:
         model=Qustion
         fields=['qustion','answer1','answer2','answer3','answer4','rightAnswer']
+
+class StoryForm(forms.ModelForm):
+    class Meta:
+        model=Story
+        fields=['title']
+class StoryPageForm(forms.ModelForm):
+    class Meta:
+        model=StoryPage
+        fields=['page']
+
         

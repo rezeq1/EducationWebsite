@@ -11,4 +11,12 @@ class garten:
     def addQustion(self,qustion,quiz):
         qustion.quiz=quiz
         qustion.save()
+
+    def add_Story(self,story,kinderGarten):
+        story.garten=kinderGarten
+        story.save()
+    def add_Story(self,Page,story):
+        story=kinderGarten
+        story.save()
+
     
