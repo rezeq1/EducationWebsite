@@ -20,6 +20,8 @@ class StoryForm(forms.ModelForm):
         model=Story
         fields=['title']
 class StoryPageForm(forms.ModelForm):
+    page = forms.ImageField(required=True)
+    page.widget.attrs.update({'accept':'video/*'})
     class Meta:
         model=StoryPage
         fields=['page']

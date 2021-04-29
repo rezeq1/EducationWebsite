@@ -15,8 +15,8 @@ class garten:
     def add_Story(self,story,kinderGarten):
         story.garten=kinderGarten
         story.save()
-    def add_Story(self,Page,story):
-        story=kinderGarten
-        story.save()
+    def add_Page(self,Page,story):
+        Page.story=story
+        Page.save()
 
     

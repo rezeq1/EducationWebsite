@@ -52,16 +52,19 @@ def add_story(req):
             return redirect("add_page",id=s.id)
     form=StoryForm()
     return render(req,'kindergarten/add_lesson.html',{'form':form})
-    
+
 @login_required
 def add_Page(req,id=None):
     if req.method == 'POST':
         form=StoryPageForm(data=req.POST,files=req.FILES)
         if  'video_file' not  in  form.data or len(form.data['desc'])> 0:
             if form.is_valid() :
-                q=form.save(commit=False)
+                SP=form.save(commit=False)
                 Page_id=form.data['Page_id']
                 id=Page_id
+                s=Story.objects.filter(id=id).first()
+                g=garten()
+                g.add_Page(SP,s)
                 messages.success(req,f'The Page Has Been Uploaded')
                 if 'has_next' not in form.data:
                     messages.success(req,f'The Story Has Been Uploaded')
