@@ -52,8 +52,7 @@ def add_story(req):
             return redirect("add_page",id=s.id)
     form=StoryForm()
     return render(req,'kindergarten/add_lesson.html',{'form':form})
-
-
+    
 @login_required
 def add_Page(req,id=None):
     if req.method == 'POST':
@@ -73,6 +72,8 @@ def add_Page(req,id=None):
     form=StoryPageForm()
     story=Story.objects.filter(id=id).first()
     return render(req,'kindergarten/add_Page.html',{'form':form,'story':story,'id':id})
+
+
 
 @login_required
 def add_Qustion(req,id=None):
