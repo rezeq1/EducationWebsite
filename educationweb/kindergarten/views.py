@@ -10,7 +10,7 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth import get_user_model
 from django.contrib.auth import update_session_auth_hash
-from .forms import LessonForm,QustionForm,StoryForm,StoryPageForm
+from .forms import *
 from .models import *
 from .kindergarten_class import garten
 from users.models import Teacher,Kindergarten
@@ -27,7 +27,7 @@ def add_lesson(req):
                 teacher=Teacher.objects.filter(username=req.user.username).first()
                 KG=Kindergarten.objects.get(myTeacher=teacher)
                 g=garten()
-                quiz=g.add_lesson(l,KG)
+                g.add_lesson(l,KG)
                 messages.success(req,f'The lesson has been uploaded')
                 return redirect("KinderGartenHome")
         else:
@@ -81,14 +81,13 @@ def add_Page(req,id=None):
 @login_required
 def lesson_info(req,id):
     l=lesson.objects.filter(id=id).first()
-    quiz=l.quiz
-    qustions=Qustion.objects.filter(quiz=quiz)
-    return render(req,'kindergarten/lesson.html',{'lesson':l,'qustions':qustions})
+    return render(req,'kindergarten/lesson.html',{'lesson':l})
 
 @login_required
 def story_info(req,id):
     s=Story.objects.filter(id=id).first()
     pages=StoryPage.objects.filter(story=s)
+    print(pages)
     return render(req,'kindergarten/story.html',{'story':s,'pages':pages})
 
 @login_required

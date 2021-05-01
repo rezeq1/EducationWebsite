@@ -3,7 +3,9 @@
 <div class="content-section">
    <h3>{{story.title}}</h3>
    {%for page in pages%}
-   <img  src="{{ page.url }}">
+   <img  src="{{ page.page.url }}" width="400" height="400" >
+   </br>
+   </br>
    {%endfor%} 
 </div>
 {%endblock%}

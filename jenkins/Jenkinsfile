@@ -9,6 +9,7 @@ stage('Test') {
             }
             steps {
                 dir("educationweb") {
+                
                         sh 'ls'
                         sh 'python manage.py test --keepdb'
                 }
