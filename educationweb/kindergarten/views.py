@@ -152,3 +152,17 @@ def Add_Question(req,HomeWork_Id):
 
     form=QuestionForm()
     return render(req,'kindergarten/add_question.html',{'form':form})
+
+@login_required
+def show_teacher_homeworks(req):
+    teacher=Teacher.objects.filter(username=req.user.username).first()
+    garten=Kindergarten.objects.filter(myTeacher=teacher).first()
+    homeworks=HomeWork.objects.filter(garten=garten)
+    return render(req,'kindergarten/teacher_Homeworks.html',{'homeworks':homeworks})
+
+
+@login_required
+def show_homework_questions(req,HomeWork_Id):
+    homework=HomeWork.objects.filter(id=HomeWork_Id).first()
+    questions=Question.objects.filter(homeWork=homework)
+    return render(req,'kindergarten/homework.html',{'homework':homework,'questions':questions})
