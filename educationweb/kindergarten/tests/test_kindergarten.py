@@ -1,5 +1,5 @@
 from ..kindergarten_class import *
-from users.models import Kindergarten,Teacher
+from users.models import *
 from ..models import *
 from django.test import TestCase
 
@@ -48,4 +48,20 @@ class gartenTestCase(TestCase):
         g=garten()
         HW=g.addHomeWork("Test",10,Kk)
         homeworks=g.show_homeworks_for_teacher(t)
+        self.assertIsNotNone(homeworks)
+
+    def test_show_homeworks_for_kid(self):
+        t=Teacher(password='1356',username='user1name',first_name='user',last_name='last',email='email@email')
+        t.save()
+        Kk=Kindergarten(name='test',seatLimit=20,myTeacher=t)
+        Kk.save()
+        g=garten()
+        HW=g.addHomeWork("Test",10,Kk)
+        p=Parent(password='12456',username='usern3ame',first_name='user',last_name='last',email='email@email')
+        p.save()
+        kid=Kid(password='11456',username='kidte5st',first_name='user',age=5,last_name='last',email='email@email')
+        kid.myParent=p
+        kid.garten=Kk
+        kid.save()
+        homeworks=g.show_homeworks_for_kid(kid)
         self.assertIsNotNone(homeworks)
