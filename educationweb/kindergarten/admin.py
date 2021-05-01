@@ -6,4 +6,5 @@ admin.site.register(Story)
 admin.site.register(StoryPage)
 admin.site.register(Question)
 admin.site.register(HomeWork)
+admin.site.register(View)
 
