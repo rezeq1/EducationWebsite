@@ -29,6 +29,23 @@ class HomeWork(models.Model):
         return this.subject
 
 
+class Question(models.Model):
+    question=models.CharField(max_length=400)
+    option1=models.CharField(max_length=400)
+    option2=models.CharField(max_length=400)
+    option3=models.CharField(max_length=400)
+    option4=models.CharField(max_length=400)
+    answer=models.CharField(max_length=400)
+    homeWork=models.ForeignKey(HomeWork, blank=True, null=True,on_delete=models.SET_NULL)
+    
+    class Meta:
+        verbose_name_plural = "Question" 
+
+    def __str__(this):
+        return this.question
+
+
+
 
     
     
