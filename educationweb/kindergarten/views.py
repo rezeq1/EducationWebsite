@@ -166,3 +166,17 @@ def show_homework_questions(req,HomeWork_Id):
     homework=HomeWork.objects.filter(id=HomeWork_Id).first()
     questions=Question.objects.filter(homeWork=homework)
     return render(req,'kindergarten/homework.html',{'homework':homework,'questions':questions})
+
+@login_required
+def show_homework_questions_for_kid(req,HomeWork_Id):
+    homework=HomeWork.objects.filter(id=HomeWork_Id).first()
+    questions=Question.objects.filter(homeWork=homework)
+    return render(req,'kindergarten/Solve_homework.html',{'homework':homework,'questions':questions})
+
+
+@login_required
+def show_homeworks_for_kid(req):
+    kid=Kid.objects.filter(username=req.user.username).first()
+    garten=kid.garten
+    homeworks=HomeWork.objects.filter(garten=garten)
+    return render(req,'kindergarten/kid_Homeworks.html',{'homeworks':homeworks})
