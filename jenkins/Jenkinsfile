@@ -9,7 +9,6 @@ stage('Test') {
             }
             steps {
                 dir("educationweb") {
-                        sh 'python -m pip install Pillow'
                         sh 'ls'
                         sh 'python manage.py test --keepdb'
                 }
