@@ -1,5 +1,5 @@
 from django.db import models
-from users.models import Kindergarten
+from users.models import *
 # Create your models here.
 
 class lesson(models.Model):
@@ -45,8 +45,8 @@ class Question(models.Model):
         return this.question
 
 class View(models.Model):
-    Lesson=models.OneToOneField(lesson,  on_delete=models.CASCADE, primary_key=False)
-    kid = models.OneToOneField(Kid,  on_delete=models.CASCADE, primary_key=False)
+    Lesson=models.ForeignKey(lesson, blank=True, null=True,on_delete=models.SET_NULL)
+    kid = models.ForeignKey(Kid, blank=True, null=True,on_delete=models.SET_NULL)
 
 
 
