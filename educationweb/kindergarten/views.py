@@ -198,3 +198,14 @@ def solve_homework(req,HomeWork_Id):
     grade=(count/len(questions))*100
     messages.success(req,f'Your grade are {grade}')
     return redirect("show_homeworks_for_kid")
+
+@login_required
+def watch_lesson(req,id):
+    l=lesson.objects.filter(id=id).first()
+    kid = Kid.objects.filter(username=req.user.username).first()
+    temp = View.objects.filter(Lesson=l,kid=kid).first()
+    if not temp:
+        view = View(Lesson=l,kid=kid)
+        view.save()
+
+    return render(req,'kindergarten/watch_lesson.html',{'lesson':l})
