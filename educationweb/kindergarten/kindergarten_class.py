@@ -36,4 +36,8 @@ class garten:
         Page.story=story
         Page.save()
 
+    def get_kindergarten_activites(self,kid):
+        KG=kid.garten
+        lessons=lesson.objects.filter(garten=KG)
+        return lessons
     

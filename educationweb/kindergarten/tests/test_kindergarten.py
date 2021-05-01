@@ -65,3 +65,21 @@ class gartenTestCase(TestCase):
         kid.save()
         homeworks=g.show_homeworks_for_kid(kid)
         self.assertIsNotNone(homeworks)
+
+    def test_kindergarten_activites(self):
+        g=garten()
+        l=lesson(title='test',desc='this is only a test')
+        t=Teacher(password='123456',username='username',first_name='user',last_name='last',email='email@email')
+        t.save()
+        Kk=Kindergarten(name='test',seatLimit=20,myTeacher=t)
+        Kk.save()
+        g.add_lesson(lesson=l,kinderGarten=Kk)
+        p=Parent(password='12456',username='usern3ame',first_name='user',last_name='last',email='email@email')
+        p.save()
+        kid=Kid(password='11456',username='kidte5st',first_name='user',age=5,last_name='last',email='email@email')
+        kid.myParent=p
+        kid.garten=Kk
+        kid.save()
+        lessons = g.get_kindergarten_activites(kid)
+        self.assertIsNotNone(lessons)
+
