@@ -179,7 +179,26 @@ def show_homeworks_for_kid(req):
     kid=Kid.objects.filter(username=req.user.username).first()
     garten=kid.garten
     homeworks=HomeWork.objects.filter(garten=garten)
-    return render(req,'kindergarten/kid_Homeworks.html',{'homeworks':homeworks})
+    grades=[]
+    for h in homeworks:
+        Submition_Date=h.created_at.replace(tzinfo=None)+timedelta(hours=24*h.duration)
+        Now_Date=datetime.now()
+        grade=Grade.objects.filter(kid=kid,homeWork=h).first()
+
+        if grade :
+           grades.append(round(grade.grade, 2))
+        elif Now_Date>=Submition_Date:
+            Gd=Grade()
+            Gd.grade=0
+            Gd.homeWork= h
+            Gd.kid= kid
+            Gd.save()  
+            grades.append(0)
+        else:
+            grades.append(-1)
+    print(grades)
+    return render(req,'kindergarten/kid_Homeworks.html',{'homeworks':zip(homeworks,grades)})
+
 
 
 @login_required
