@@ -36,8 +36,8 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               
-              {% get_model1_object user as ans %}
                 {% if user.is_authenticated %}
+                {% get_model1_object user as ans %}
                 <li class="nav-item">
                 <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
               </li>
@@ -69,7 +69,6 @@
                </div>
             {% endfor%}
             {% endif %}
-            {% block content %}{% endblock %}
           </div>
           {% if user.is_authenticated %}
           <div class="col-md-4">
@@ -77,39 +76,39 @@
               <h3>Your Sidebar</h3>
               <p class='text-muted'>
                 <ul class="list-group">
+
+                  {% if ans.0 %}
+                  <li class="list-group-item list-group-item-light">     <a href="delete_parent"> remove  account</a></li>
+                  </li>
+
+                  <li class="list-group-item list-group-item-light">    <a href="{% url 'kid_register'%}">Add a Kid</a> </li>
+
+                  <li class="list-group-item list-group-item-light">    <a href="{% url 'show_kids'%}">Show my kids</a> </li>
+                  
+                  <li class="list-group-item list-group-item-light">    <a href="{% url 'ChangePassword'%}"> Change my password</a> </li>
+
+
+                  {%endif%}
+
+                  {% if ans.1 %}
+                    {% if ans.3 %}
+                    <li class="list-group-item list-group-item-light">     <h6> Your Kindergarten name : {{ans.3}}</h6> </li>
+                    <li class="list-group-item list-group-item-light"> <a href="{% url 'show_kindergarten_kids'%}"> Show Kindergarten's kids</a> </li>
+                    <li class="list-group-item list-group-item-light">  <a href="{% url 'KinderGartenHome'%}"> Show  lessons & stories</a> </li>
+                    <li class="list-group-item list-group-item-light">  <a href="{% url 'show_teacher_homeworks'%}"> Show  homeworks</a> </li>
+                    {% else %}
+                      <li class="list-group-item list-group-item-light">     <a href="{% url 'Kindergarten_register'%}"> Create my Kindergarten</a> </li>
+
+                    {%endif%}
+                    <li class="list-group-item list-group-item-light">    <a href="{% url 'delete_teacher'%}">remove  account</a> </li>
                     
-                      {% if ans.0 %}
-                      <li class="list-group-item list-group-item-light">     <a href="delete_parent"> remove  account</a></li>
-                      </li>
 
-                      <li class="list-group-item list-group-item-light">    <a href="{% url 'kid_register'%}">Add a Kid</a> </li>
-
-                      <li class="list-group-item list-group-item-light">    <a href="{% url 'show_kids'%}">Show my kids</a> </li>
-                      
-                      <li class="list-group-item list-group-item-light">    <a href="{% url 'ChangePassword'%}"> Change my password</a> </li>
-
-
-                      {%endif%}
-
-                      {% if ans.1 %}
-                        {% if ans.3 %}
-                        <li class="list-group-item list-group-item-light">     <h6> Your Kindergarten name : {{ans.3}}</h6> </li>
-                        <li class="list-group-item list-group-item-light"> <a href="{% url 'show_kindergarten_kids'%}"> Show Kindergarten's kids</a> </li>
-                        <li class="list-group-item list-group-item-light">  <a href="{% url 'KinderGartenHome'%}"> Show  lessons & stories</a> </li>
-                        <li class="list-group-item list-group-item-light">  <a href="{% url 'show_teacher_homeworks'%}"> Show  homeworks</a> </li>
-                        {% else %}
-                          <li class="list-group-item list-group-item-light">     <a href="{% url 'Kindergarten_register'%}"> Create my Kindergarten</a> </li>
-
-                        {%endif%}
-                        <li class="list-group-item list-group-item-light">    <a href="{% url 'delete_teacher'%}">remove  account</a> </li>
-                        
-
-                  {%endif%}
-                  {%if ans.2 %}
-                      <li class="list-group-item list-group-item-light">  <a href="#"> Show  lessons</a> </li>
-                      <li class="list-group-item list-group-item-light">  <a href="#"> Show  homeworks</a> </li>
-                      <li class="list-group-item list-group-item-light">  <a href="{% url 'ChangePassword'%}"> Change my password</a> </li>
-                  {%endif%}
+              {%endif%}
+              {%if ans.2 %}
+                  <li class="list-group-item list-group-item-light">  <a href="#"> Show  lessons</a> </li>
+                  <li class="list-group-item list-group-item-light">  <a href="#"> Show  homeworks</a> </li>
+                  <li class="list-group-item list-group-item-light">  <a href="{% url 'ChangePassword'%}"> Change my password</a> </li>
+              {%endif%}
 
                 </ul>
               </p>

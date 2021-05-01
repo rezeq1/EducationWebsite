@@ -1,0 +1,63 @@
+
+{% extends "users/base.html" %}
+{% block content %}
+<div class="content-section">
+ 
+<p3>Homework subject : {{homework.subject}}</p3>
+</br>
+<p3>Homework added at : {{homework.created_at}}</p3>
+</br>
+<p3>Homework duration : {{homework.duration}} days</p3>
+</br>
+<form action={% url 'solve_homework' HomeWork_Id=homework.id %} method="post">
+    {% csrf_token %}
+
+{% for question in questions %}
+    <article class="media content-section">
+          <div class="media-body">
+          <legend class="border-bottom ">
+          </br>
+             Question : <small class="text-muted">{{ question.question }}</small>
+             </legend>
+            </br>
+            options:
+            </br>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="{{question.option1}}" id="{{question.option1}}" name="{{question.id}}">
+                <label class="form-check-label" for="apple">{{ question.option1  }}</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="{{question.option2}}" id="{{question.option2}}" name="{{question.id}}">
+                <label class="form-check-label" for="apple">{{ question.option2  }}</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="{{question.option3}}" id="{{question.option3}}" name="{{question.id}}">
+                <label class="form-check-label" for="apple">{{ question.option3  }}</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="{{question.option4}}" id="{{question.option4}}" name="{{question.id}}">
+                <label class="form-check-label" for="apple">{{ question.option4  }}</label>
+            </div>
+
+            <legend class="border-bottom "></legend>
+          </div>
+        </article>
+
+    
+{% endfor %}
+        <button type="submit">Submit</button>
+</form>
+
+
+ 
+</br>
+</br>
+</br>
+</br>
+    
+</div>
+{%endblock%}
