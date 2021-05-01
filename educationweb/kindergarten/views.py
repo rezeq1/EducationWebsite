@@ -98,3 +98,57 @@ def KinderGartenHome(req):
     stories=Story.objects.filter(garten=KG).all()
     return render(req,'kindergarten/KinderGartenHome.html',{'lessons':lessons,'stories':stories})
 
+
+@login_required
+def Add_HomeWork(req):
+    if req.method == 'POST':
+
+        form1=HomeWorkForm(data=req.POST)
+        form2=QuestionForm(data=req.POST)
+
+        if form1.is_valid() and form2.is_valid():
+            homework=form1.save(commit=False)
+            question=form2.save(commit=False)
+
+            teacher=Teacher.objects.filter(username=req.user.username).first()
+            garten=Kindergarten.objects.filter(myTeacher=teacher).first()
+            
+            homework.garten=garten
+            homework.save()
+
+            question.homeWork=homework
+            question.save()
+
+            messages.success(req,f'The question has been added')
+            if 'has_next' not in form2.data:
+                return redirect("show_teacher_homeworks")
+            else:
+                return redirect("Add_Question",HomeWork_Id=homework.id)
+
+
+    form1=HomeWorkForm()
+    form2=QuestionForm()
+    return render(req,'kindergarten/add_HomeWork.html',{'form1':form1,'form2':form2})
+
+
+@login_required
+def Add_Question(req,HomeWork_Id):
+    if req.method == 'POST':
+
+        form=QuestionForm(data=req.POST)
+
+        if form.is_valid() :
+            homework=HomeWork.objects.filter(id=HomeWork_Id).first()
+            question=form.save(commit=False)
+            question.homeWork=homework
+            question.save()
+
+            messages.success(req,f'The qustion has been added')
+            if 'has_next' not in form.data:
+                return redirect("show_teacher_homeworks")
+            else:
+                return redirect("Add_Question",HomeWork_Id=homework.id)
+
+
+    form=QuestionForm()
+    return render(req,'kindergarten/add_question.html',{'form':form})
