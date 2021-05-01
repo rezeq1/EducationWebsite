@@ -13,7 +13,7 @@ from django.contrib.auth import update_session_auth_hash
 from .forms import *
 from .models import *
 from .kindergarten_class import garten
-from users.models import Teacher,Kindergarten
+from users.models import *
 # Create your views here.
 
 

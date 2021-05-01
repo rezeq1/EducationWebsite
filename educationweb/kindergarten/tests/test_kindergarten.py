@@ -15,3 +15,13 @@ class gartenTestCase(TestCase):
         g.add_lesson(lesson=l,kinderGarten=Kk)
         self.assertIsNotNone(l)
     
+        
+    def test_add_HomeWork(self):
+        t=Teacher(password='123456',username='username',first_name='user',last_name='last',email='email@email')
+        t.save()
+        Kk=Kindergarten(name='test',seatLimit=20,myTeacher=t)
+        Kk.save()
+        g=garten()
+        HW=g.addHomeWork("Test",10,Kk)
+        self.assertIsNotNone(HW)
+        
