@@ -1,5 +1,7 @@
 from django import forms 
 from .models import *
+from django.core.validators import MinValueValidator
+
 class LessonForm(forms.ModelForm):
     video_file = forms.FileField(required=False)
     desc = forms.CharField (widget=forms.Textarea,required=False) 
@@ -26,4 +28,9 @@ class StoryPageForm(forms.ModelForm):
         model=StoryPage
         fields=['page']
 
-        
+class HomeWorkForm(forms.ModelForm):
+    subject=forms.CharField(max_length=50, required=True)
+    duration=forms.IntegerField(required=True, validators=[MinValueValidator(1)])
+    class Meta:
+        model=HomeWork
+        fields=['subject','duration']
