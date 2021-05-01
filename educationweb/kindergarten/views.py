@@ -209,3 +209,11 @@ def watch_lesson(req,id):
         view.save()
 
     return render(req,'kindergarten/watch_lesson.html',{'lesson':l})
+
+
+@login_required  
+def kindergarten_activites(req):
+    kid=Kid.objects.filter(username=req.user.username).first()
+    KG=kid.garten
+    lessons=lesson.objects.filter(garten=KG)
+    return render(req,'kindergarten/kindergarte_aktivites.html',{'lessons':lessons})
