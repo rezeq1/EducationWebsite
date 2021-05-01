@@ -180,3 +180,21 @@ def show_homeworks_for_kid(req):
     garten=kid.garten
     homeworks=HomeWork.objects.filter(garten=garten)
     return render(req,'kindergarten/kid_Homeworks.html',{'homeworks':homeworks})
+
+
+@login_required
+def solve_homework(req,HomeWork_Id):
+    homework=HomeWork.objects.filter(id=HomeWork_Id).first()
+    questions=Question.objects.filter(homeWork=homework)
+    count=0
+    for q in questions:
+        ans = req.POST.getlist(str(q.id))
+        right=q.answer
+        options=[q.option1,q.option2,q.option3,q.option4]
+        if len(ans) == 1 :
+            if ans[0] == options[int(right)-1] :
+                count+=1
+
+    grade=(count/len(questions))*100
+    messages.success(req,f'Your grade are {grade}')
+    return redirect("show_homeworks_for_kid")
