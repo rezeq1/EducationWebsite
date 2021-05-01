@@ -1,0 +1,23 @@
+{% extends "users/base.html" %}
+{% block content %}
+<div class="content-section">
+ 
+    {%if lesson.video_file %}
+    <video class="embed-responsive embed-responsive-16by9" type="video/mp4" preload="auto" controls="controls" >
+        <source src="{{lesson.video_file.url}}" type="video/mp4" />
+        </video>
+    <h3 class="mt-2 mb-2">{{lesson.title}}</h3>
+    {% endif %}
+
+    <p>
+    {{lesson.desc}}
+    </p>
+    <br/>
+    
+
+
+
+
+    
+</div>
+{%endblock%}
