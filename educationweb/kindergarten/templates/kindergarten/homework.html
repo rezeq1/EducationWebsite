@@ -1,0 +1,44 @@
+
+{% extends "users/base.html" %}
+{% block content %}
+<div class="content-section">
+ 
+<p3>Homework subject : {{homework.subject}}</p3>
+</br>
+<p3>Homework added at : {{homework.created_at}}</p3>
+</br>
+<p3>Homework duration : {{homework.duration}} days</p3>
+</br>
+
+{% for question in questions %}
+    <article class="media content-section">
+          <div class="media-body">
+          <legend class="border-bottom ">
+          </br>
+             Question : <small class="text-muted">{{ question.question }}</small>
+             </legend>
+            </br>
+            options:
+            </br>
+            1) <small class="text-muted">{{ question.option1  }}</small>
+            </br>
+            2) <small class="text-muted">{{ question.option2 }}</small>
+            </br>
+            3) <small class="text-muted">{{ question.option3 }}</small>
+            </br>
+            4) <small class="text-muted">{{ question.option4 }}</small>
+            </br>
+            Right answer: <small class="text-muted">{{ question.answer }}</small>
+            <legend class="border-bottom "></legend>
+          </div>
+        </article>
+
+    
+{% endfor %}
+</br>
+</br>
+</br>
+</br>
+    
+</div>
+{%endblock%}

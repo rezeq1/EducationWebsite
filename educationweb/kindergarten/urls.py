@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import add_lesson,KinderGartenHome,lesson_info,add_story,add_Page,story_info
+from .views import *
 
 urlpatterns = [
     path('add_lesson/',add_lesson,name="add_lesson"),
