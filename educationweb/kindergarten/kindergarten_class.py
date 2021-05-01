@@ -40,4 +40,16 @@ class garten:
         KG=kid.garten
         lessons=lesson.objects.filter(garten=KG)
         return lessons
+
+    def add_grade(self,kid,HW,grade):
+        g = Grade()
+        g.grade = grade
+        g.kid = kid
+        g.homeWork = HW
+        g.save()
+        return g
+    
+    def get_grade(self,kid):
+        g = Grade.objects.filter(kid=kid)
+        return g
     

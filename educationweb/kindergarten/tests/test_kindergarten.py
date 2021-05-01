@@ -83,3 +83,19 @@ class gartenTestCase(TestCase):
         lessons = g.get_kindergarten_activites(kid)
         self.assertIsNotNone(lessons)
 
+    def test_add_grades(self):
+        t=Teacher(password='1356',username='user1name',first_name='user',last_name='last',email='email@email')
+        t.save()
+        Kk=Kindergarten(name='test',seatLimit=20,myTeacher=t)
+        Kk.save()
+        g=garten()
+        HW=g.addHomeWork("Test",10,Kk)
+        p=Parent(password='12456',username='usern3ame',first_name='user',last_name='last',email='email@email')
+        p.save()
+        kid=Kid(password='11456',username='kidte5st',first_name='user',age=5,last_name='last',email='email@email')
+        kid.myParent=p
+        kid.garten=Kk
+        kid.save()
+        grades = g.add_grade(kid,HW,100)
+        self.assertIsNotNone(grades)
+    
