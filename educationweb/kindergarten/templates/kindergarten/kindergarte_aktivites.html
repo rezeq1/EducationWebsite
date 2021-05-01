@@ -1,0 +1,26 @@
+{% extends "users/base.html" %}
+{% block content %}
+<div class="content-section">
+
+<table class="table table-striped">
+    
+<thead>
+    <tr>
+        <th scope="col">lesson title </th>
+        <th scope="col"></th>
+    </tr>
+</thead>
+<tbody>
+{% for lesson in lessons %}
+<tr>
+    <td>{{lesson.title}}</td>
+
+    <td><a href="{% url 'watch_lesson' id=lesson.id %}" style="color:blue" class="btn">Watch Lesson</a></td>
+
+  </tr>
+{%endfor%}
+</tbody>
+</table>
+
+</div>
+{%endblock%}
