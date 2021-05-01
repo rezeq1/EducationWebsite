@@ -16,6 +16,7 @@ urlpatterns = [
     path('show_homework_questions_for_kid/<int:HomeWork_Id>/',show_homework_questions_for_kid,name="show_homework_questions_for_kid"),
     path('solve_homework/<int:HomeWork_Id>/',solve_homework,name="solve_homework"),
     path('show_homeworks_for_kid/',show_homeworks_for_kid,name="show_homeworks_for_kid"),
+    path('watch_lesson/<int:id>/',watch_lesson,name="watch_lesson"),
     
 
 
