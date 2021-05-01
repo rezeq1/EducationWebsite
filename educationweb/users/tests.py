@@ -194,10 +194,27 @@ class AuthTestCase(TestCase):
         k.Kick_From_Kindergarten(kid)
 
         self.assertIsNotNone(kid.garten)
+
+    def test_add_rate(self):
+        a=auth()
+
+        p=Parent(password='a213sf',username='12as3dsf',first_name='us12er',last_name='last',email='emaasil@email')
+        kid=Kid(password='123',username='kidsdftest',first_name='uasdser',age=5,last_name='laa1st',email='emsail@aas')
+        t=Teacher(password='dsf',username='sdf24',first_name='user',last_name='last',email='eddmail@asd')
+        Kk=Kindergarten(name='tesdfst',seatLimit=20)
+
+        a.parent_register(p)
+        kid.myParent=p
+        a.kid_register(kid)
+        a.teacher_register(t)
+        k=Kindergarten_methods(Kk)
+        k.create(t)
+        k.add_kid(kid)
+
+        rate=k.add_rate(10,kid)
+
+
+        self.assertIsNotNone(rate)
+
     
 
-
-
-
-
-    

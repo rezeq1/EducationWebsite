@@ -1,3 +1,5 @@
+from .models import *
+
 class Kindergarten_methods():
     def __init__(self,kindergarten):
         self.kindergarten=kindergarten
@@ -16,5 +18,13 @@ class Kindergarten_methods():
 
     def Kick_From_Kindergarten(self,kid):
         kid.garten.kid_set.remove(kid)
+
+    def add_rate(self,score,kid):
+        rate = Rate()
+        rate.son = kid
+        rate.score = score
+        rate.save()
+        return rate
+
 
     
