@@ -44,6 +44,10 @@ class Question(models.Model):
     def __str__(this):
         return this.question
 
+class View(models.Model):
+    Lesson=models.OneToOneField(lesson,  on_delete=models.CASCADE, primary_key=False)
+    kid = models.OneToOneField(Kid,  on_delete=models.CASCADE, primary_key=False)
+
 
 
 
