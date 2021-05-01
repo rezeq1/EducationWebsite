@@ -13,14 +13,16 @@
     </tr>
 </thead>
 <tbody>
-{% for homework in homeworks %}
+{% for homework,grade in homeworks %}
 <tr>
     <td>{{homework.subject}}</td>
     <td>{{homework.created_at}}</td>
     <td>{{homework.duration}} days</td>
-
-    <td><a href="{% url 'show_homework_questions_for_kid' HomeWork_Id=homework.id %}" style="color:blue" class="btn">Solve </a></td>
-
+    {% if grade > -1 %}
+        <td>{{grade}} %</td>
+    {% else %}
+        <td><a href="{% url 'show_homework_questions_for_kid' HomeWork_Id=homework.id %}" style="color:blue" class="btn">Solve </a></td>
+    {%endif%}
     
 </tr>
 {%endfor%}
