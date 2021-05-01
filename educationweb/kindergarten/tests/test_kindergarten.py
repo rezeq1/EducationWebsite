@@ -38,4 +38,14 @@ class gartenTestCase(TestCase):
         q.save()
         g.addQuestion(q,HW)
         self.assertIsNotNone(q.homeWork)
-        
+
+            
+    def test_show_homeworks_for_teacher(self):
+        t=Teacher(password='123456',username='username',first_name='user',last_name='last',email='email@email')
+        t.save()
+        Kk=Kindergarten(name='test',seatLimit=20,myTeacher=t)
+        Kk.save()
+        g=garten()
+        HW=g.addHomeWork("Test",10,Kk)
+        homeworks=g.show_homeworks_for_teacher(t)
+        self.assertIsNotNone(homeworks)

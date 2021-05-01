@@ -8,7 +8,7 @@ class garten:
     def addQuestion(self,question,homework):
         question.homeWork=homework
         question.save()
-        
+
     
     def addHomeWork(self,subject,duration,garten):
         HW=HomeWork()
@@ -18,6 +18,15 @@ class garten:
         HW.save()
         return HW
 
+    def show_homeworks_for_teacher(self,teacher):
+        garten=Kindergarten.objects.filter(myTeacher=teacher).first()
+        homeworks=HomeWork.objects.filter(garten=garten)
+        return homeworks
+
+    def show_homeworks_for_kid(self,kid):
+        garten=kid.garten
+        homeworks=HomeWork.objects.filter(garten=garten)
+        return homeworks
 
     def add_Story(self,story,kinderGarten):
         story.garten=kinderGarten
