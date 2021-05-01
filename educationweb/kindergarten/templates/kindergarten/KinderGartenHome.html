@@ -1,6 +1,7 @@
 {% extends "users/base.html" %}
 {% block content %}
 <div class="content-section">
+<small>Lessons</small>
 <a href="{% url 'add_lesson' %}" style="color:blue" class="btn">add new lesson</a>
 
 <table class="table table-striped">
@@ -17,6 +18,33 @@
     <td>{{lesson.title}}</td>
 
     <td><a href="{% url 'lesson_info' id=lesson.id %}" style="color:blue" class="btn">Show info</a></td>
+
+   
+
+  </tr>
+{%endfor%}
+</tbody>
+</table>
+</div>
+
+<div class="content-section">
+<small>Stories</small>
+<a href="{% url 'add_story' %}" style="color:blue" class="btn">add new story</a>
+
+<table class="table table-striped">
+    
+<thead>
+    <tr>
+        <th scope="col">story title </th>
+        <th scope="col"></th>
+    </tr>
+</thead>
+<tbody>
+{% for story in stories %}
+<tr>
+    <td>{{story.title}}</td>
+
+    <td><a href="{% url 'story_info' id=story.id %}" style="color:blue" class="btn">Show info</a></td>
 
    
 

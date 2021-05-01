@@ -1,0 +1,9 @@
+{% extends "users/base.html" %}
+{% block content %}
+<div class="content-section">
+   <h3>{{story.title}}</h3>
+   {%for page in pages%}
+   <img  src="{{ page.url }}">
+   {%endfor%} 
+</div>
+{%endblock%}

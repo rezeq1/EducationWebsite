@@ -14,32 +14,6 @@
     {{lesson.desc}}
     </p>
 
-    {% for qustion in qustions %}
-    <article class="media content-section">
-          <div class="media-body">
-          <legend class="border-bottom ">
-             <small class="text-muted">{{ qustion.qustion }}</small>
-             </legend>
-            </br>
-            1)<small class="text-muted">{{ qustion.answer1  }}</small>
-            </br>
-            2)<small class="text-muted">{{ qustion.answer2 }}</small>
-            </br>
-            3)<small class="text-muted">{{ qustion.answer3 }}</small>
-            </br>
-            4)<small class="text-muted">{{ qustion.answer4 }}</small>
-            </br>
-            right answer: <small class="text-muted">{{ qustion.rightAnswer }}</small>
-            <legend class="border-bottom "></legend>
-          </div>
-        </article>
-    
-    
-    
-    
-    
-    
-    {% endfor %}
     
 </div>
 {%endblock%}
