@@ -48,6 +48,18 @@ class View(models.Model):
     Lesson=models.ForeignKey(lesson, blank=True, null=True,on_delete=models.SET_NULL)
     kid = models.ForeignKey(Kid, blank=True, null=True,on_delete=models.SET_NULL)
 
+class Grade(models.Model):
+    grade=models.FloatField()
+    kid=models.ForeignKey(Kid, blank=True, null=True,on_delete=models.CASCADE) 
+    homeWork=models.ForeignKey(HomeWork, blank=True, null=True,on_delete=models.CASCADE) 
+
+    class Meta:
+        verbose_name_plural = "Grade"
+
+    def __str__(this):
+        return this.kid.username+'_'+str(this.grade)
+
+
 
 
 
