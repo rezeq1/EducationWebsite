@@ -10,6 +10,7 @@ urlpatterns = [
     path('Add_HomeWork',Add_HomeWork,name="Add_HomeWork"),
     path('add_story/',add_story,name="add_story"),
     path('add_Page/<int:id>/',add_Page,name="add_page"),
+    path('Add_Question/<int:HomeWork_Id>/',Add_Question,name="Add_Question"),
     
     
 
