@@ -14,6 +14,8 @@ from .forms import *
 from .models import *
 from .kindergarten_class import garten
 from users.models import *
+from datetime import datetime, timedelta
+
 # Create your views here.
 
 
@@ -215,8 +217,14 @@ def solve_homework(req,HomeWork_Id):
                 count+=1
 
     grade=(count/len(questions))*100
-    messages.success(req,f'Your grade are {grade}')
+    kid=Kid.objects.filter(username=req.user.username).first()
+    Gd=Grade()
+    Gd.grade=grade
+    Gd.homeWork= homework
+    Gd.kid= kid
+    Gd.save()      
     return redirect("show_homeworks_for_kid")
+
 
 @login_required
 def watch_lesson(req,id):
