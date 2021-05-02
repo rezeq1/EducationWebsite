@@ -4,7 +4,7 @@ pipeline {
 stage('Test') {
             agent {
                 docker {
-                    image 'amarhabneen/bm_team7'
+                    image 'izaldal/django:team12'
                 }
             }
             steps {
