@@ -23,9 +23,10 @@ stage('Test') {
                 }
             }
             steps {
-                dir("educationweb") {
-                
-                        sh 'python manage.py test kindergarten.tests.integration_test --keepdb'
+                dir("educationweb\kindergarten\tests") {
+                        
+                    sh 'ls'
+                        sh 'python manage.py test integration_test --keepdb'
                 }
             }
             
