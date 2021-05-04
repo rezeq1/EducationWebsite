@@ -244,3 +244,9 @@ def kindergarten_activites(req):
     KG=kid.garten
     lessons=lesson.objects.filter(garten=KG)
     return render(req,'kindergarten/kindergarte_aktivites.html',{'lessons':lessons})
+
+@login_required
+def Show_story_for_kid(req,id):
+    s=Story.objects.filter(id=id).first()
+    pages=StoryPage.objects.filter(story=s)
+    return render(req,'kindergarten/story.html',{'story':s,'pages':pages})
