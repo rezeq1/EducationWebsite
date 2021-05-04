@@ -16,6 +16,22 @@ stage('Test') {
             }
             
         }
+ stage('Integration Test') {
+            agent {
+                docker {
+                    image 'izaldal/django:team12'
+                }
+            }
+            steps {
+                dir("educationweb") {
+                
+                        sh 'python manage.py test kindergarten.tests.integration_test --keepdb'
+                }
+            }
+            
+        }
+
+
 
 
     }
