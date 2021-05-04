@@ -1,0 +1,29 @@
+{% extends "users/base.html" %}
+{% block content %}
+
+<div class="content-section">
+<small>Stories</small>
+
+<table class="table table-striped">
+    
+<thead>
+    <tr>
+        <th scope="col">story title </th>
+        <th scope="col"></th>
+    </tr>
+</thead>
+<tbody>
+{% for story in stories %}
+<tr>
+    <td>{{story.title}}</td>
+
+    <td><a href="{% url 'Show_story_for_kid' id=story.id %}" style="color:blue" class="btn">Show info</a></td>
+
+   
+
+  </tr>
+{%endfor%}
+</tbody>
+</table>
+</div>
+{%endblock%}
