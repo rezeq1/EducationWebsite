@@ -51,8 +51,7 @@ urlpatterns = [
     path('show_kindergarten_kids/',user_views.show_kindergarten_kids,name='show_kindergarten_kids'),
     path('kick_kid/<str:username>/',user_views.kick_kid,name='kick_kid'),
     path('',include('kindergarten.urls'))
-    path('Get_Kid_stories/',Get_Kid_stories,name='Get_Kid_stories'),
-    path('Show_story_for_kid/<int:id>/',Show_story_for_kid,name="Show_story_for_kid"),
+
 
 ]
 
