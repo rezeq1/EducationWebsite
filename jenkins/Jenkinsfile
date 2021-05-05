@@ -30,12 +30,6 @@ stage('Test') {
             }
             
         }
- stage('Email Notifications') {
-     mail bcc: '', body: '''Hi welcome to jenkins email alerts .
-Thanks , bey  ''', cc: '', from: '', replyTo: '', subject: 'Jenkins Job', to: 'education.web.reset@gmail.com'
-     
- }
-
 
 
     }
