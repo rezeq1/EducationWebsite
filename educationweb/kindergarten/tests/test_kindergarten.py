@@ -115,4 +115,29 @@ class gartenTestCase(TestCase):
         g.add_grade(kid,HW,100)
         grades = g.get_grade(kid)
         self.assertIsNotNone(grades)
+
+    def test_add_Story(self):
+        t=Teacher(password='1356',username='user1name',first_name='user',last_name='last',email='email@email')
+        t.save()
+        Kk=Kindergarten(name='test',seatLimit=20,myTeacher=t)
+        Kk.save()
+        story=Story(title='test')
+        g=garten()
+        g.add_Story(story,Kk)
+        tst=Story.objects.filter(title='test').first()
+        self.assertIsNotNone(tst)
+
+    def test_add_Page(self):
+        
+        t=Teacher(password='1356',username='user1name',first_name='user',last_name='last',email='email@email')
+        t.save()
+        Kk=Kindergarten(name='test',seatLimit=20,myTeacher=t)
+        Kk.save()
+        story=Story(title='test')
+        g=garten()
+        g.add_Story(story,Kk)
+        page=StoryPage(story=story)
+        g.add_Page(page,story)
+        tst=StoryPage.objects.filter(story=story.id).first()
+        self.assertIsNotNone(tst)
     

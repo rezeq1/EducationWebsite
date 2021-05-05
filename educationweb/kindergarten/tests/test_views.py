@@ -156,5 +156,22 @@ class ViewsTestCase(TestCase):
         res=c.get(f'/kindergarten_activites/')
         self.assertEqual(res.status_code,302)
         self.assertEqual(res.resolver_match.func, kindergarten_activites)
+    
+    def test_add_story(self):
+        k=Teacher(password='123456',username='TeacherTest',first_name='user',last_name='last',email='email@email')
+        c = Client()
+        c.login(username='TeacherTest', password='123456')
+
+        res=c.get(f'/add_story/')
+        self.assertEqual(res.status_code,302)
+        self.assertEqual(res.resolver_match.func, add_story)
+    def test_add_Page(self):
+        k=Teacher(password='123456',username='TeacherTest',first_name='user',last_name='last',email='email@email')
+        c = Client()
+        c.login(username='TeacherTest', password='123456')
+        
+        res=c.get(f'/add_Page/1/')
+        self.assertEqual(res.status_code,302)
+        self.assertEqual(res.resolver_match.func, add_Page)
 
     
