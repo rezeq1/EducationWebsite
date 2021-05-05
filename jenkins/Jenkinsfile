@@ -30,7 +30,11 @@ stage('Test') {
             }
             
         }
-
+    stage('Email Notification')
+            {
+                    mail bcc: '', body: 'test', cc: '', from: '', replyTo: '', subject: 'Jenkins Job', to: 'education.web.reset@gmail.com'
+            
+             }
 
     }
 }
