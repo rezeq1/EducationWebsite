@@ -17,16 +17,31 @@ from django.http import JsonResponse
 # Create your views here.
 
 # Create your views here.
+
+@login_required
 def animals_memory_game(req):
     if req.method == 'POST':
-        html = "<html><body>It is now </body></html>"
-        return HttpResponse(html)
+        return redirect('Play_game')
     else:
         return render(req,'games/animals.html')
 
+@login_required
 def numbers_memory_game(req):
     if req.method == 'POST':
-        html = "<html><body>It is now </body></html>"
-        return HttpResponse(html)
+        return redirect('Play_game')
     else:
         return render(req,'games/numbers.html')
+
+
+@login_required    
+def Play_game(req):
+    if req.method == 'POST':
+        print(req.POST)
+        if req.POST.get("animals")=='':
+            return redirect('animals_memory_game')
+        else:
+            return redirect('numbers_memory_game')
+
+    else:
+        return render(req,'games/Play_game.html')
+

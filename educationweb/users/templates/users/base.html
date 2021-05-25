@@ -15,7 +15,8 @@
     <title>{{title}}</title>
     {% endif %}</head>
 <body>
-     
+
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Menu</a>
@@ -96,8 +97,9 @@
                   {%endif%}
                   {%if ans.2 %}
                       <li class="list-group-item list-group-item-light">  <a href="{% url 'kindergarten_activites'%}"> Show  lessons</a> </li>
-                      <li class="list-group-item list-group-item-light">  <a href="{% url 'show_homeworks_for_kid'%}"> show homeworks</a> </li>
-                      <li class="list-group-item list-group-item-light">  <a href="{% url 'Get_Kid_stories'%}"> show stories</a> </li>
+                      <li class="list-group-item list-group-item-light">  <a href="{% url 'show_homeworks_for_kid'%}"> Show homeworks</a> </li>
+                      <li class="list-group-item list-group-item-light">  <a href="{% url 'Get_Kid_stories'%}"> Show stories</a> </li>
+                      <li class="list-group-item list-group-item-light">  <a href="{% url 'Play_game'%}"> Play games</a> </li>
                       <li class="list-group-item list-group-item-light">  <a href="{% url 'ChangePassword'%}"> Change my password</a> </li>
                   {%endif%}
 
