@@ -1,0 +1,62 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>Matching Game</title>
+    <meta name="description" content="">
+    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet prefetch" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'games\app.css' %}" >
+    <link rel="shortcut icon" type="image/x-icon" href="/media/games/favicon.ico" />
+</head>
+<body>
+
+    <form enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+
+    <div class="overlay">
+        <div class="overlay-content">
+                <section class="switch-msg"></section>
+                <ul class="stars"></ul>
+                <h4>Done with <span class="moves">0</span> Moves in  <span class="timer"><span class="timer-minutes">0</span>:<span class="timer-seconds">00</span></span></h4> 
+                <button class="restart"><i class="fa fa-repeat"></i> Home</button>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <header>
+            <h1 class="title">Memory Game <img src="/media/games/pelican.svg" alt="" width="50"></h1>
+        </header>
+
+        <section class="score-panel">
+
+        	<span class="moves">0</span> Moves
+            <span class="timer"><span class="timer-minutes">0</span>:<span class="timer-seconds">00</span></span>
+            
+            <div class="restart">
+        		<i class="fa fa-repeat"></i> Restart   
+        	</div>
+
+            <div class="hint">
+        		<i class="fa fa-repeat"></i> hint   
+        	</div>            
+            
+        </br>
+        <button class="btn"><i class="fa fa-home"></i> Home</button>
+            
+
+        </section>
+
+        <ul class="deck"></ul>
+
+    </div>
+
+    <script src="{% static 'games\numbers.js' %}" defer></script>
+
+</form>
+</body>
+</html>
