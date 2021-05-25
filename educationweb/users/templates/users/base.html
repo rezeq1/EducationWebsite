@@ -84,6 +84,7 @@
                       {% if ans.1 %}
                         {% if ans.3 %}
                         <li class="list-group-item list-group-item-light">     <h6> Your Kindergarten name : {{ans.3}}</h6> </li>
+                        <li class="list-group-item list-group-item-light">  <a href="{% url 'home'%}">&#x2709; Message board </a> </li>
                         <li class="list-group-item list-group-item-light"> <a href="{% url 'show_kindergarten_kids'%}">&#128187; Show Kindergarten's kids</a> </li>
                         <li class="list-group-item list-group-item-light">  <a href="{% url 'KinderGartenHome'%}">&#127909; Show  lessons & stories</a> </li>
                         <li class="list-group-item list-group-item-light">  <a href="{% url 'show_teacher_homeworks'%}">&#128218; Show  homeworks</a> </li>
