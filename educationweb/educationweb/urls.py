@@ -18,6 +18,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from users import views as user_views
+from games import views as game_views
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -50,8 +51,10 @@ urlpatterns = [
     path('Change_Kindergarten/<str:username>/',user_views.Change_Kindergarten,name='Change_Kindergarten'),
     path('show_kindergarten_kids/',user_views.show_kindergarten_kids,name='show_kindergarten_kids'),
     path('kick_kid/<str:username>/',user_views.kick_kid,name='kick_kid'),
-    path('',include('kindergarten.urls'))
+    path('',include('kindergarten.urls')),
 
+    path('animals_memory_game/',game_views.animals_memory_game,name='animals_memory_game'),
+    path('numbers_memory_game/',game_views.numbers_memory_game,name='numbers_memory_game'),
 
 ]
 
