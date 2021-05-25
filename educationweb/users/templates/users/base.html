@@ -69,14 +69,14 @@
                 <ul class="list-group">
                     
                       {% if ans.0 %}
-                      <li class="list-group-item list-group-item-light">     <a href="delete_parent"> remove  account</a></li>
+                      <li class="list-group-item list-group-item-light">     <a href="delete_parent">&#128465;&#65039; remove  account</a></li>
                       </li>
 
-                      <li class="list-group-item list-group-item-light">    <a href="{% url 'kid_register'%}">Add a Kid</a> </li>
+                      <li class="list-group-item list-group-item-light">    <a href="{% url 'kid_register'%}">&#10133; Add a Kid</a> </li>
 
-                      <li class="list-group-item list-group-item-light">    <a href="{% url 'show_kids'%}">Show my kids</a> </li>
+                      <li class="list-group-item list-group-item-light">    <a href="{% url 'show_kids'%}">&#128187; Show my kids</a> </li>
                       
-                      <li class="list-group-item list-group-item-light">    <a href="{% url 'ChangePassword'%}"> Change my password</a> </li>
+                      <li class="list-group-item list-group-item-light">    <a href="{% url 'ChangePassword'%}">&#128274; Change my password</a> </li>
 
 
                       {%endif%}
@@ -84,23 +84,24 @@
                       {% if ans.1 %}
                         {% if ans.3 %}
                         <li class="list-group-item list-group-item-light">     <h6> Your Kindergarten name : {{ans.3}}</h6> </li>
-                        <li class="list-group-item list-group-item-light"> <a href="{% url 'show_kindergarten_kids'%}"> Show Kindergarten's kids</a> </li>
-                        <li class="list-group-item list-group-item-light">  <a href="{% url 'KinderGartenHome'%}"> Show  lessons & stories</a> </li>
-                        <li class="list-group-item list-group-item-light">  <a href="{% url 'show_teacher_homeworks'%}"> Show  homeworks</a> </li>
+                        <li class="list-group-item list-group-item-light"> <a href="{% url 'show_kindergarten_kids'%}">&#128187; Show Kindergarten's kids</a> </li>
+                        <li class="list-group-item list-group-item-light">  <a href="{% url 'KinderGartenHome'%}">&#127909; Show  lessons & stories</a> </li>
+                        <li class="list-group-item list-group-item-light">  <a href="{% url 'show_teacher_homeworks'%}">&#128218; Show  homeworks</a> </li>
                         {% else %}
-                          <li class="list-group-item list-group-item-light">     <a href="{% url 'Kindergarten_register'%}"> Create my Kindergarten</a> </li>
+                          <li class="list-group-item list-group-item-light">     <a href="{% url 'Kindergarten_register'%}">&#10133; Create my Kindergarten</a> </li>
 
                         {%endif%}
-                        <li class="list-group-item list-group-item-light">    <a href="{% url 'delete_teacher'%}">remove  account</a> </li>
+                        <li class="list-group-item list-group-item-light">    <a href="{% url 'delete_teacher'%}">&#128465;&#65039; remove  account</a> </li>
                         
 
                   {%endif%}
                   {%if ans.2 %}
-                      <li class="list-group-item list-group-item-light">  <a href="{% url 'kindergarten_activites'%}"> Show  lessons</a> </li>
-                      <li class="list-group-item list-group-item-light">  <a href="{% url 'show_homeworks_for_kid'%}"> Show homeworks</a> </li>
-                      <li class="list-group-item list-group-item-light">  <a href="{% url 'Get_Kid_stories'%}"> Show stories</a> </li>
-                      <li class="list-group-item list-group-item-light">  <a href="{% url 'Play_game'%}"> Play games</a> </li>
-                      <li class="list-group-item list-group-item-light">  <a href="{% url 'ChangePassword'%}"> Change my password</a> </li>
+                      <li class="list-group-item list-group-item-light">  <a href="{% url 'home'%}">&#x2709; Message board </a> </li>
+                      <li class="list-group-item list-group-item-light">  <a href="{% url 'kindergarten_activites'%}">&#127909; Show  lessons</a> </li>
+                      <li class="list-group-item list-group-item-light">  <a href="{% url 'show_homeworks_for_kid'%}">&#128218; Show homeworks</a> </li>
+                      <li class="list-group-item list-group-item-light">  <a href="{% url 'Get_Kid_stories'%}">&#128213; Show stories</a> </li>
+                      <li class="list-group-item list-group-item-light">  <a href="{% url 'Play_game'%}"> &#127918; Play games </a> </li>
+                      <li class="list-group-item list-group-item-light">  <a href="{% url 'ChangePassword'%}">&#128274; Change my password</a> </li>
                   {%endif%}
 
                 </ul>
