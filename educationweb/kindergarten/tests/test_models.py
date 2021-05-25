@@ -14,3 +14,14 @@ class StoryPageTest(TestCase):
     def test_story_Page_creation(self):
         story=StoryPage()
         self.assertTrue(isinstance(story,StoryPage))
+
+class Board(TestCase):
+    def test_story_Page_creation(self):
+        story=StoryPage()
+        self.assertTrue(isinstance(story,StoryPage))
+
+class BoardMessage(TestCase):
+    def test_story_Page_creation(self):
+        story=StoryPage()
+        self.assertTrue(isinstance(story,StoryPage))
+
