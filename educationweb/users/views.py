@@ -17,6 +17,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.contrib.auth import update_session_auth_hash
 from django.http import JsonResponse
+from kindergarten.models import *
 # Create your views here.
 
 
@@ -57,8 +58,19 @@ def home(req):
             HaveGarten = False
         else:
             HaveGarten = Garten.name
+        
+        messages = [ ]
+        if HaveGarten :
+            board=Board.objects.filter(garten=Garten).first()
+            if req.method == 'POST':
+                msg=BoardMessage()
+                msg.message=req.POST.get('message')
+                msg.board=board
+                msg.save()
 
-        return render(req,'users/teacher_home.html',{'user':req.user,'parent':False,'teacher':True,'kid':False,'HaveGarten':HaveGarten})
+            messages=BoardMessage.objects.filter(board=board).all()
+            
+        return render(req,'users/teacher_home.html',{'user':req.user,'parent':False,'teacher':True,'kid':False,'HaveGarten':HaveGarten,'BoardMessages':messages})
 
 
 @login_required
