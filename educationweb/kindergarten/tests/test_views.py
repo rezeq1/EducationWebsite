@@ -24,6 +24,7 @@ class ViewsTestCase(TestCase):
         self.assertEqual(res.status_code,302)
         self.assertEqual(res.resolver_match.func, Get_Kid_stories)
     
+    
     def test_show_story_for_kid(self):
         k=Kid(password='123456',username='kidTest',first_name='user',last_name='last',email='email@email')
         c = Client()

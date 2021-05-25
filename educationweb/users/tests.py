@@ -2,6 +2,7 @@ from django.test import TestCase,Client
 from .models import *
 from .auth import *
 from .Kindergarten_methods import *
+from .views import *
 # Create your tests here.
 
 
@@ -218,3 +219,20 @@ class AuthTestCase(TestCase):
 
     
 
+    def test_kid_message_board(self):
+        k=Kid(password='123456',username='kidTest',first_name='user',last_name='last',email='email@email')
+        c = Client()
+        c.login(username='kidTest', password='123456')
+
+        res=c.get(f'/home/')
+        self.assertEqual(res.status_code,302)
+        self.assertEqual(res.resolver_match.func, home)
+    
+    def test_teacher_message_board(self):
+        t=Teacher(password='123456',username='teacer',first_name='user',last_name='last',email='email@email')
+        c = Client()
+        c.login(username='teacer', password='123456')
+
+        res=c.get(f'/home/')
+        self.assertEqual(res.status_code,302)
+        self.assertEqual(res.resolver_match.func, home)
