@@ -8,4 +8,5 @@ admin.site.register(Question)
 admin.site.register(HomeWork)
 admin.site.register(View)
 admin.site.register(Grade)
-
+admin.site.register(Board)
+admin.site.register(BoardMessage)

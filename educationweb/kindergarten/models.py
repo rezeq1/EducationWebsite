@@ -59,10 +59,21 @@ class Grade(models.Model):
     def __str__(this):
         return this.kid.username+'_'+str(this.grade)
 
+class Board(models.Model):
+    garten=models.ForeignKey(Kindergarten, blank=True, null=True,on_delete=models.SET_NULL)
 
+    class Meta:
+        verbose_name_plural = "Board"
 
+    def __str__(this):
+        return this.garten.name+'_Board'
 
+class BoardMessage(models.Model):
+    message=models.CharField(max_length=500)
+    board=models.ForeignKey(Board, blank=True, null=True,on_delete=models.CASCADE)
 
-    
-    
+    class Meta:
+        verbose_name_plural = "BoardMessage"
 
+    def __str__(this):
+        return this.message
