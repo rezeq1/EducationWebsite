@@ -48,6 +48,10 @@ class View(models.Model):
     Lesson=models.ForeignKey(lesson, blank=True, null=True,on_delete=models.SET_NULL)
     kid = models.ForeignKey(Kid, blank=True, null=True,on_delete=models.SET_NULL)
 
+class ViewStory(models.Model):
+    story=models.ForeignKey(Story, blank=True, null=True,on_delete=models.SET_NULL)
+    kid = models.ForeignKey(Kid, blank=True, null=True,on_delete=models.SET_NULL)
+
 class Grade(models.Model):
     grade=models.FloatField()
     kid=models.ForeignKey(Kid, blank=True, null=True,on_delete=models.CASCADE) 
