@@ -64,7 +64,7 @@ def home(req):
         messages = [ ]
         if HaveGarten :
             board=Board.objects.filter(garten=Garten).first()
-            if req.method == 'POST':
+            if req.method == 'POST' and req.POST.get('message'):
                 msg=BoardMessage()
                 msg.message=req.POST.get('message')
                 msg.board=board
@@ -168,6 +168,11 @@ def Kindergarten_register(req):
             Kindergarten_obj=Kindergarten(name=name,seatLimit=seatLimit,myTeacher=teacher)
             model=Kindergarten_methods(Kindergarten_obj)
             model.create(teacher)
+
+            board=Board()
+            board.garten=Kindergarten_obj
+            board.save()
+
             messages.success(req,f'Your kindergarten has been created!')
             return home(req)
     else:
@@ -241,7 +246,7 @@ def teacher_register(req):
             user.is_active = False
             user.save()
             current_site = get_current_site(req)
-            mail_subject = 'Requeדsr for a new teacher account'
+            mail_subject = 'Request for a new teacher account'
             message = render_to_string('users/account_active_email.html', {
                 'user': user,
                 'domain': current_site.domain,
@@ -286,7 +291,32 @@ def activate(req, uidb64, token):
 def show_rate(req,username):
     kid=Kid.objects.filter(username=username).first()
     rate = Rate.objects.filter(son=kid).first()
-    return render(req,'users/show_rate.html',{'kid':kid,'rate':rate})
+    garten = kid.garten
+
+    numLesson = len(lesson.objects.filter(garten=garten).all())
+    numViews = len(View.objects.filter(kid=kid).all())
+    numStory = len(Story.objects.filter(garten=garten).all())
+    numStoryViews = len(ViewStory.objects.filter(kid=kid).all())
+    numHW = len(HomeWork.objects.filter(garten=garten).all())
+    numgrade = len(Grade.objects.filter(kid=kid).all())
+
+    if numgrade != 0:
+        AvgGrade = sum(list(map(lambda x: x.grade,Grade.objects.filter(kid=kid).all()))) / numgrade
+    else:
+        AvgGrade = 0
+
+    rates = []
+
+    for son in Kid.objects.filter(garten=garten).all():
+        r = Rate.objects.filter(son=son).first()
+        if r:
+            rates.append(r)
+
+    AvgRates = sum(list(map(lambda x: x.score,rates))) / len(rates)
+
+    res = {'kid':kid,'rate':rate,'numLesson':numLesson,'numViews':numViews,'numStory':numStory,'numStoryViews':numStoryViews,'numHW':numHW,'numgrade':numgrade,'AvgGrade':AvgGrade,'AvgRates':AvgRates}
+
+    return render(req,'users/show_rate.html',res)
 
 def rate_garten(request):
 

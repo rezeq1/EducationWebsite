@@ -21,6 +21,7 @@ urlpatterns = [
     path('Get_Kid_stories/',Get_Kid_stories,name='Get_Kid_stories'),
     path('Show_story_for_kid/<int:id>/',Show_story_for_kid,name="Show_story_for_kid"),
     
+    
 
 
 ]

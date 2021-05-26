@@ -30,6 +30,13 @@ def add_lesson(req):
                 KG=Kindergarten.objects.get(myTeacher=teacher)
                 g=garten()
                 g.add_lesson(l,KG)
+
+                board=Board.objects.filter(garten=KG).first()
+                msg=BoardMessage()
+                msg.board=board
+                msg.message="A new lesson about "+l.title+" added "
+                msg.save()
+
                 messages.success(req,f'The lesson has been uploaded')
                 return redirect("KinderGartenHome")
         else:
@@ -49,6 +56,13 @@ def add_story(req):
             KG=Kindergarten.objects.get(myTeacher=teacher)
             g=garten()
             g.add_Story(s,KG)
+
+            board=Board.objects.filter(garten=KG).first()
+            msg=BoardMessage()
+            msg.board=board
+            msg.message="A new story about "+s.title+" added "
+            msg.save()
+                
             return redirect("add_page",id=s.id)
     form=StoryForm()
     return render(req,'kindergarten/add_story.html',{'form':form})
@@ -123,6 +137,13 @@ def Add_HomeWork(req):
 
             messages.success(req,f'The question has been added')
             if 'has_next' not in form2.data:
+                
+                board=Board.objects.filter(garten=garten).first()
+                msg=BoardMessage()
+                msg.board=board
+                msg.message="A new homework about "+homework.subject+" added "
+                msg.save()
+                
                 return redirect("show_teacher_homeworks")
             else:
                 return redirect("Add_Question",HomeWork_Id=homework.id)
@@ -249,8 +270,16 @@ def kindergarten_activites(req):
 def Show_story_for_kid(req,id):
     s=Story.objects.filter(id=id).first()
     pages=StoryPage.objects.filter(story=s)
-    return render(req,'kindergarten/story.html',{'story':s,'pages':pages})
+    kid = Kid.objects.filter(username=req.user.username).first()
 
+    if not ViewStory.objects.filter(story=s,kid=kid):
+        view = ViewStory()
+        view.story = s
+        view.kid = kid
+        view.save()
+    
+    return render(req,'kindergarten/story.html',{'story':s,'pages':pages})
+    
 @login_required
 def Get_Kid_stories(req):
     kid=Kid.objects.filter(username=req.user.username).first()
