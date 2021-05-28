@@ -292,13 +292,31 @@ def show_rate(req,username):
     kid=Kid.objects.filter(username=username).first()
     rate = Rate.objects.filter(son=kid).first()
     garten = kid.garten
+    fullName = kid.first_name + " " +  kid.last_name
 
     numLesson = len(lesson.objects.filter(garten=garten).all())
     numViews = len(View.objects.filter(kid=kid).all())
+
+    if numLesson !=0:
+        AvGLesson = (numLesson/numViews)*100
+    else:
+        AvGLesson = 0
+
     numStory = len(Story.objects.filter(garten=garten).all())
     numStoryViews = len(ViewStory.objects.filter(kid=kid).all())
+
+    if numStory !=0:
+        AvGStory = (numStoryViews / numStory)*100
+    else:
+        AvGStory = 0
+
     numHW = len(HomeWork.objects.filter(garten=garten).all())
     numgrade = len(Grade.objects.filter(kid=kid).all())
+
+    if numHW !=0:
+        AvGHW = (numgrade / numHW)*100
+    else:
+        AvGHW = 0
 
     if numgrade != 0:
         AvgGrade = sum(list(map(lambda x: x.grade,Grade.objects.filter(kid=kid).all()))) / numgrade
@@ -312,9 +330,11 @@ def show_rate(req,username):
         if r:
             rates.append(r)
 
-    AvgRates = sum(list(map(lambda x: x.score,rates))) / len(rates)
+    AvgRates = (sum(list(map(lambda x: x.score,rates))) / (len(rates)*5))*100
 
-    res = {'kid':kid,'rate':rate,'numLesson':numLesson,'numViews':numViews,'numStory':numStory,'numStoryViews':numStoryViews,'numHW':numHW,'numgrade':numgrade,'AvgGrade':AvgGrade,'AvgRates':AvgRates}
+    res = {'kid':kid,'rate':rate,'numLesson':numLesson,'numViews':numViews,
+    'numStory':numStory,'numStoryViews':numStoryViews,'numHW':numHW,'numgrade':numgrade,
+    'AvgGrade':AvgGrade,'AvgRates':AvgRates,'fullName':fullName,'AvGLesson':AvGLesson,'AvGStory':AvGStory,'AvGHW':AvGHW}
 
     return render(req,'users/show_rate.html',res)
 
