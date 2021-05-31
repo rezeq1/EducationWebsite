@@ -1,26 +1,149 @@
 {% extends "users/base.html" %}
 {% block content %}
-<div class="content-section">
 
-<table class="table table-striped">
-    
-<thead>
-    <tr>
-        <th scope="col">lesson title </th>
-        <th scope="col"></th>
-    </tr>
-</thead>
-<tbody>
-{% for lesson in lessons %}
-<tr>
-    <td>{{lesson.title}}</td>
+<style>
 
-    <td><a href="{% url 'watch_lesson' id=lesson.id %}" style="color:blue" class="btn">Watch Lesson</a></td>
+body{
+    margin-top:20px;
+    background: #f1f2f7;
+}
 
-  </tr>
-{%endfor%}
-</tbody>
-</table>
+.directory-list, .directory-info-row .social-links {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
 
-</div>
+.directory-list li {
+    border-left: 3px solid #f1f2f7;
+    display: table-cell;
+    width: 1%;
+}
+
+.directory-list li a {
+    display: block;
+    padding: 8px 0;
+    text-align: center;
+    text-transform: uppercase;
+    background: #fff;
+    color: #7A7676;
+    -moz-transition: all 0.2s ease-out 0s;
+    -webkit-transition: all 0.2s ease-out 0s;
+    transition: all 0.2s ease-out 0s;
+    text-decoration: none;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.directory-info-row .thumb {
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    height: auto;
+    width: 175px;
+    margin-right: 10px;
+}
+
+.directory-list li a:hover, .directory-info-row .social-links li a:hover {
+    background: #ff6c60;
+    color: #fff;
+}
+
+.directory-info-row {
+    display: inline-block;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.directory-info-row h4, .directory-info-row a {
+    color: #424F63;
+}
+
+.h4, h4 {
+    font-size: 18px;
+}
+
+.directory-info-row .social-links {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.directory-info-row .social-links li {
+    display: inline-block;
+}
+
+ul li {
+    list-style: none;
+}
+
+.directory-info-row .social-links li a {
+    background: #EFF0F4;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    color: #7A7676;
+}
+.button {
+  width: 140px;
+  height: 50px;
+  display: inline-block;
+  border-radius: 50px;
+  background-color: #a3d063;
+  border: 2px solid #a3d063;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s linear;
+  text-align: center;
+  float: right;
+}
+</style>
+
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+<div class="container">
+    <form enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+    <div class="directory-info-row">
+        
+    {% for lesson in lessons %}
+
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="media">
+                            <a class="pull-left" href="#">
+                                <img class="thumb media-object" src="/media/games/lesson.svg" alt="" />
+                            </a>
+                            <div class="media-body">
+                                <h4>{{lesson.title}}</h4>
+
+                                <button class="button" name="LessonID" value="{{lesson.id}}"> Watch </button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <br>
+        <br>
+        <br>
+    {%endfor%}
+    </div>
+    </div>
+   
+    <br>
+    <br>
+    <br>
+</form>
+
 {%endblock%}
+
+
+

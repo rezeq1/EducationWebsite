@@ -95,13 +95,3 @@ class RequestPasswordForm(forms.Form):
     class Meta: 
         model = User 
         fields = [ 'username', 'email',  ]
-
-class EditInfo(UserCreationForm):
-
-    firstname = forms.CharField(max_length=30, required=True)
-    lastname = forms.CharField(max_length=30, required=True)
-    email = forms.EmailField(max_length=254,required=True )   
-
-    class Meta: 
-        model = User 
-        fields = ['firstname', 'lastname','email',]

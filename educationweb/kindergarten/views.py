@@ -196,31 +196,33 @@ def show_homework_questions_for_kid(req,HomeWork_Id):
     questions=Question.objects.filter(homeWork=homework)
     return render(req,'kindergarten/Solve_homework.html',{'homework':homework,'questions':questions})
 
-
 @login_required
 def show_homeworks_for_kid(req):
-    kid=Kid.objects.filter(username=req.user.username).first()
-    garten=kid.garten
-    homeworks=HomeWork.objects.filter(garten=garten)
-    grades=[]
-    for h in homeworks:
-        Submition_Date=h.created_at.replace(tzinfo=None)+timedelta(hours=24*h.duration)
-        Now_Date=datetime.now()
-        grade=Grade.objects.filter(kid=kid,homeWork=h).first()
+    if req.method == 'POST':
+        id=int(req.POST.get("HW_ID"))
+        return show_homework_questions_for_kid(req,id)
+    else:
+        kid=Kid.objects.filter(username=req.user.username).first()
+        garten=kid.garten
+        homeworks=HomeWork.objects.filter(garten=garten)
+        grades=[]
+        for h in homeworks:
+            Submition_Date=h.created_at.replace(tzinfo=None)+timedelta(hours=24*h.duration)
+            Now_Date=datetime.now()
+            grade=Grade.objects.filter(kid=kid,homeWork=h).first()
 
-        if grade :
-           grades.append(round(grade.grade, 2))
-        elif Now_Date>=Submition_Date:
-            Gd=Grade()
-            Gd.grade=0
-            Gd.homeWork= h
-            Gd.kid= kid
-            Gd.save()  
-            grades.append(0)
-        else:
-            grades.append(-1)
-    print(grades)
-    return render(req,'kindergarten/kid_Homeworks.html',{'homeworks':zip(homeworks,grades)})
+            if grade :
+                grades.append(round(grade.grade, 2))
+            elif Now_Date>=Submition_Date:
+                Gd=Grade()
+                Gd.grade=0
+                Gd.homeWork= h
+                Gd.kid= kid
+                Gd.save()  
+                grades.append(0)
+            else:
+                grades.append(-1)
+        return render(req,'kindergarten/kid_Homeworks.html',{'homeworks':zip(homeworks,grades)})
 
 
 
@@ -261,10 +263,15 @@ def watch_lesson(req,id):
 
 @login_required  
 def kindergarten_activites(req):
-    kid=Kid.objects.filter(username=req.user.username).first()
-    KG=kid.garten
-    lessons=lesson.objects.filter(garten=KG)
-    return render(req,'kindergarten/kindergarte_aktivites.html',{'lessons':lessons})
+    if req.method == 'POST':
+        id=int(req.POST.get("LessonID"))
+        return watch_lesson(req,id)
+    else:
+        kid=Kid.objects.filter(username=req.user.username).first()
+        KG=kid.garten
+        lessons=lesson.objects.filter(garten=KG)
+        return render(req,'kindergarten/kindergarte_aktivites.html',{'lessons':lessons})
+
 
 @login_required
 def Show_story_for_kid(req,id):
@@ -282,7 +289,11 @@ def Show_story_for_kid(req,id):
     
 @login_required
 def Get_Kid_stories(req):
-    kid=Kid.objects.filter(username=req.user.username).first()
-    KG=kid.garten
-    stories=Story.objects.filter(garten=KG).all()
-    return render(req,'kindergarten/Kid_Stories.html',{'stories':stories})
+    if req.method == 'POST':
+        id=int(req.POST.get("StoryId"))
+        return Show_story_for_kid(req,id)
+    else:
+        kid=Kid.objects.filter(username=req.user.username).first()
+        KG=kid.garten
+        stories=Story.objects.filter(garten=KG).all()
+        return render(req,'kindergarten/Kid_Stories.html',{'stories':stories})
