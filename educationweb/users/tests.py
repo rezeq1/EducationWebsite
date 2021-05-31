@@ -267,3 +267,12 @@ class AuthTestCase(TestCase):
         res=c.get(f'/home/Teatcher_Edit_info/')
         self.assertEqual(res.status_code,302)
         self.assertEqual(res.resolver_match.func, Teatcher_Edit_info)
+    
+    def test_kid_edit_info(self):
+        t=Kid(password='123456',username='kid',first_name='user',last_name='last',email='email@email')
+        c = Client()
+        c.login(username='kid', password='123456')
+
+        res=c.get(f'/home/Kid_Edit_info/')
+        self.assertEqual(res.status_code,302)
+        self.assertEqual(res.resolver_match.func, Kid_Edit_info)
