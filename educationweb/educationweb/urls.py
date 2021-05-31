@@ -57,6 +57,9 @@ urlpatterns = [
     path('animals_memory_game/',game_views.animals_memory_game,name='animals_memory_game'),
     path('numbers_memory_game/',game_views.numbers_memory_game,name='numbers_memory_game'),
     path('Play_game/',game_views.Play_game,name='Play_game'),
+    path('home/Teatcher_Edit_info/',user_views.Teatcher_Edit_info,name="Teatcher_Edit_info"),
+    path('home/Kid_Edit_info/',user_views.Kid_Edit_info,name="Kid_Edit_info"),
+
 
 ]
 
