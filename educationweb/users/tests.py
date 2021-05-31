@@ -241,3 +241,29 @@ class AuthTestCase(TestCase):
     def test_rate(self):
         rate=Rate()
         self.assertTrue(isinstance(rate,Rate))
+    
+    def test_parent(self):
+        parent=Parent()
+        self.assertTrue(isinstance(parent,Parent))
+
+    def test_teacher(self):
+        teacher=Teacher()
+        self.assertTrue(isinstance(teacher,Teacher))
+
+    def test_kid(self):
+        kid=Kid()
+        self.assertTrue(isinstance(kid,Kid))
+        
+    def test_kindergarten(self):
+        garten=Kindergarten()
+        self.assertTrue(isinstance(garten,Kindergarten))
+
+
+    def test_teacher_edit_info(self):
+        t=Teacher(password='123456',username='teacer',first_name='user',last_name='last',email='email@email')
+        c = Client()
+        c.login(username='teacer', password='123456')
+
+        res=c.get(f'/home/Teatcher_Edit_info/')
+        self.assertEqual(res.status_code,302)
+        self.assertEqual(res.resolver_match.func, Teatcher_Edit_info)
