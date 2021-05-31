@@ -400,3 +400,42 @@ def kick_kid(req,username):
     model.Kick_From_Kindergarten(kid)
     messages.success(req,f'kid {username} has been kicked')
     return home(req)
+
+@login_required
+def Teatcher_Edit_info(req):
+    if req.method == 'POST':
+        teacher=Teacher.objects.filter(username=req.user.username).first()
+        teacher.first_name = req.POST.get("firstname")
+        teacher.last_name = req.POST.get("lastname")
+        teacher.email = req.POST.get("email")
+        if User.objects.filter(email = teacher.email).exists():
+            messages.warning(req,f'email is already used !')
+            return render(req,'users/Teatcher_Edit_info.html',{'teacher':teacher})
+
+        teacher.save()
+        messages.success(req,f'Changes saved')
+        return home(req)
+    else:
+        teacher=Teacher.objects.filter(username=req.user.username).first()
+    return render(req,'users/Teatcher_Edit_info.html',{'teacher':teacher})
+
+@login_required
+def Kid_Edit_info(req):
+    if req.method == 'POST':
+        kid=Kid.objects.filter(username=req.user.username).first()
+        kid.first_name = req.POST.get("firstname")
+        kid.last_name = req.POST.get("lastname")
+        kid.email = req.POST.get("email")
+        kid.age = int(req.POST.get("age"))
+        if User.objects.filter(email = kid.email).exists():
+            messages.warning(req,f'email is already used !')
+            return render(req,'users/kid_Edit_info.html',{'kid':kid})
+
+        kid.save()
+        messages.success(req,f'Changes saved')
+        return home(req)
+    else:
+        kid=Kid.objects.filter(username=req.user.username).first()
+    return render(req,'users/kid_Edit_info.html',{'kid':kid})
+    
+    
