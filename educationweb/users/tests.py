@@ -236,3 +236,8 @@ class AuthTestCase(TestCase):
         res=c.get(f'/home/')
         self.assertEqual(res.status_code,302)
         self.assertEqual(res.resolver_match.func, home)
+
+
+    def test_rate(self):
+        rate=Rate()
+        self.assertTrue(isinstance(rate,Rate))
