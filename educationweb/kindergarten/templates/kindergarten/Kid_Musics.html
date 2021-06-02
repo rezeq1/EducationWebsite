@@ -1,0 +1,28 @@
+{% extends "users/base.html" %}
+{% block content %}
+
+<div class="content-section">
+
+<table class="table table-striped">
+    
+<thead>
+    <tr>
+        <th scope="col">Music title </th>
+        <th scope="col"></th>
+    </tr>
+</thead>
+{% for music in musics %}
+<tr>
+    <td>{{music.title}}</td>
+
+    <td><audio src="{{music.music_file.url}}" controls>
+</audio></td>
+
+   
+
+  </tr>
+{%endfor%}
+</tbody>
+</table>
+</div>
+{%endblock%}
