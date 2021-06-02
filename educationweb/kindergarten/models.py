@@ -81,3 +81,10 @@ class BoardMessage(models.Model):
 
     def __str__(this):
         return this.message
+
+class Music(models.Model):
+    garten=models.ForeignKey(Kindergarten, blank=True, null=True,on_delete=models.SET_NULL) 
+    music_file = models.FileField(upload_to='music/%y')
+    title = models.CharField(max_length=100)
+    def _str_(self) -> str:
+        return self.title

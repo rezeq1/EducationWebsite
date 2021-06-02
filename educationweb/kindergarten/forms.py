@@ -34,3 +34,10 @@ class HomeWorkForm(forms.ModelForm):
     class Meta:
         model=HomeWork
         fields=['subject','duration']
+
+class MusicForm(forms.ModelForm):
+    music_file = forms.FileField(required=True)
+    music_file.widget.attrs.update({'accept':'music/*'})
+    class Meta:
+        model=Music
+        fields=['title','music_file']        

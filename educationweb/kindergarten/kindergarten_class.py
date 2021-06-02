@@ -53,3 +53,6 @@ class garten:
         g = Grade.objects.filter(kid=kid)
         return g
     
+    def add_music(self,music,kinderGarten):
+        music.garten=kinderGarten
+        music.save()
