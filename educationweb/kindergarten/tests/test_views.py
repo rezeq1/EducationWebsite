@@ -175,4 +175,12 @@ class ViewsTestCase(TestCase):
         self.assertEqual(res.status_code,302)
         self.assertEqual(res.resolver_match.func, add_Page)
 
+    def test_add_Music(self):
+        k=Teacher(password='123456',username='TeacherTest',first_name='user',last_name='last',email='email@email')
+        c = Client()
+        c.login(username='TeacherTest', password='123456')
+        
+        res=c.get(f'/add_music/')
+        self.assertEqual(res.status_code,302)
+        self.assertEqual(res.resolver_match.func, add_music)
     
