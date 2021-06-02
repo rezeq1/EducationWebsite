@@ -318,3 +318,10 @@ def add_music(req):
 
     form=MusicForm()
     return render(req,'kindergarten/add_music.html',{'form':form})
+
+@login_required
+def Get_Kid_Music(req):
+    kid=Kid.objects.filter(username=req.user.username).first()
+    KG=kid.garten
+    musics=Music.objects.filter(garten=KG).all()
+    return render(req,'kindergarten/Kid_Musics.html',{'musics':musics})
