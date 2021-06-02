@@ -297,3 +297,24 @@ def Get_Kid_stories(req):
         KG=kid.garten
         stories=Story.objects.filter(garten=KG).all()
         return render(req,'kindergarten/Kid_Stories.html',{'stories':stories})
+
+@login_required
+def add_music(req):
+    if req.method == 'POST':
+        form=MusicForm(data=req.POST,files=req.FILES)
+        if form.is_valid() :
+            m=form.save(commit=False)
+            teacher=Teacher.objects.filter(username=req.user.username).first()
+            KG=Kindergarten.objects.get(myTeacher=teacher)
+            g=garten()
+            g.add_music(m,KG)
+            board=Board.objects.filter(garten=KG).first()
+            msg=BoardMessage()
+            msg.board=board
+            msg.message="A new music about "+m.title+" added "
+            msg.save()
+            messages.success(req,f'The music has been uploaded')
+            return redirect("KinderGartenHome")
+
+    form=MusicForm()
+    return render(req,'kindergarten/add_music.html',{'form':form})
