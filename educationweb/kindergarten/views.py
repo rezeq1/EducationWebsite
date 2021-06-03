@@ -112,7 +112,8 @@ def KinderGartenHome(req):
     KG=Kindergarten.objects.filter(myTeacher=teacher).first()
     lessons=lesson.objects.filter(garten=KG).all()
     stories=Story.objects.filter(garten=KG).all()
-    return render(req,'kindergarten/KinderGartenHome.html',{'lessons':lessons,'stories':stories})
+    musics=Music.objects.filter(garten=KG).all()
+    return render(req,'kindergarten/KinderGartenHome.html',{'lessons':lessons,'stories':stories,'musics':musics})
 
 
 @login_required

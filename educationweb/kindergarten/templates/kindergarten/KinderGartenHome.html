@@ -48,6 +48,32 @@
 
     <td><a href="{% url 'story_info' id=story.id %}" style="color:blue" class="btn">Show info</a></td>
 
+  </tr>
+{%endfor%}
+</tbody>
+</table>
+</div>
+<div class="content-section">
+<small>Music</small>
+<br>
+<a href="{% url 'add_music' %}" style="color:blue" class="btn">&#10133; add new Music</a>
+
+<table class="table table-striped">
+    
+<thead>
+    <tr>
+        <th scope="col">Music title </th>
+        <th scope="col"></th>
+    </tr>
+</thead>
+<tbody>
+{% for music in musics %}
+<tr>
+    <td>{{music.title}}</td>
+
+    <td><audio src="{{music.music_file.url}}" controls>
+</audio></td>
+
    
 
   </tr>
