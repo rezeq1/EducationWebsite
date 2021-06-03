@@ -1,0 +1,211 @@
+{% extends "users/base.html" %}
+{% block content %}
+  <div class="container d-flex flex-column h-100 flex-wrap">
+        <div class="flex-grow-1"></div>
+        <div class="row justify-content-center mt-1">
+            <div id="chat-log" style="height: 600px; max-height: 100%; overflow-y: auto;" class="p-1 w-100 ">
+                {%for message in chat_messages%}
+                <div class="row w-75 bg-light ml-1 mb-1 text-dark rounded pull-left message-element">
+                            <table class="table bg-light">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="border-0 d-row d-flex">
+                                            
+                                            <div class="w-100"> 
+                                                <p  class="text-left">{{message.sender}} :</p>
+                                                
+                                                <p dir="rtl" class="text-left ">{{message.message}}</p>
+                                                
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row" class="border-0 pr-0 pt-0 pb-0"><small class="text-muted pull-left"> {{data.message.date}}</small></p></th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    {%endfor%}
+                
+                <div id="chat-scroll-down">
+
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                
+                <input id="chat-message-input" type="text" class="form-control" aria-describedby="basic-addon1" dir="rtl">
+                <div class="input-group-prepend">
+                    <button id="chat-message-submit" class="btn btn-primary" type="button" value="Send" dir="rtl">Send</button>
+                </div>
+            </div>
+        </div>
+        <div class="flex-grow-1"></div>       
+    </div>
+    {{ chat_id|json_script:"chat-id" }}
+    {{ user.username|json_script:"user-name"}}
+    {{ user.id|json_script:"user-id"}}
+    <script>
+
+    function ScrollToEnd() {
+            // Scroll
+            /*$("#chat-log").animate({
+                scrollTop: $('#chat-log').prop("scrollHeight")
+            }, 1000);*/
+            $('html, body').animate({scrollTop:$(document).height()}, 'slow')
+        }
+
+        //ScrollToEnd()
+        
+        let indexOfMessages = 0;
+        const user_name = JSON.parse(document.getElementById('user-name').textContent);
+        let no_more_messages = false;
+
+        const chatID = JSON.parse(document.getElementById('chat-id').textContent);
+        const userId=JSON.parse(document.getElementById('user-id').textContent);
+        const chatSocket = new WebSocket( 'ws://' + window.location.host + '/ws/chat/' + chatID + '/');
+
+        chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            console.log(data)
+            if(data.command == 'fetch_messages'){
+                no_more_messages = data.messages.length  == 0;
+                let first_elem = null;
+                if(!data.scroll_to_end){
+                    first_elem = $("#chat-log").children().first();
+                }
+                Array.prototype.forEach.call(data.messages, function(elem){
+                    if(user_name == elem.contact){
+                        $("#chat-log").prepend(
+                            `<div class="row w-75 bg-light mr-1 mb-1 text-dark rounded pull-right message-element">
+                                <table class="table bg-light">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="border-0 d-row d-flex">
+                                                <div class="mr-2"> 
+                                                   
+                                                </div>
+                                                <div class="w-100"> 
+                                                    <p dir="rtl" class="text-right message-content">${elem.message}</p>
+                                                    <p style="display:none;" class="sender_email">${elem.contact}</p>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row" class="border-0 pr-0 pt-0 pb-0"><small class="text-muted pull-left"> ${elem.date} ${elem.time}</small></p></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>`
+                        ); 
+                    }
+                    else{
+                        $("#chat-log").prepend(
+                            `<div class="row w-75 bg-light ml-1 mb-1 text-dark rounded pull-left message-element">
+                                <table class="table bg-light">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="border-0 d-row d-flex">
+                                                <div class="mr-2"> 
+                                                   
+                                                </div>
+                                                <div class="w-100"> 
+                                                    <p dir="rtl" class="text-right message-content">${elem.message}</p>
+                                                    <p style="display:none;" class="sender_email">${elem.contact}</p>
+                                                    
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row" class="border-0 pr-0 pt-0 pb-0"><small class="text-muted pull-left"> ${elem.date} ${elem.time}</small></p></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>`
+                        ); 
+                    }
+                       
+                });
+                if(data.scroll_to_end){
+                    ScrollToEnd();
+                }
+                else{
+                    var previous_height = 0;
+                    first_elem.prevAll().each(function() {
+                        previous_height += $(this).outerHeight();
+                    });
+                    $("#chat-log").scrollTop(previous_height);
+                }
+            }
+            else if(data.command == 'new_message'){
+             console.log(data.message.sender)
+
+                
+                    $("#chat-scroll-down").before(
+                        `<div class="row w-75 bg-light ml-1 mb-1 text-dark rounded pull-left message-element">
+                            <table class="table bg-light">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="border-0 d-row d-flex">
+                                            
+                                            <div class="w-100"> 
+                                                <p  class="text-left">${data.message.sender} :</p>
+                                                
+                                                <p dir="rtl" class="text-left ">${data.message.message}</p>
+                                                
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row" class="border-0 pr-0 pt-0 pb-0"><small class="text-muted pull-left"> ${data.message.date}</small></p></th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>`
+                    );
+                
+                //ScrollToEnd();
+            }
+        };
+
+        chatSocket.onclose = function(e) {
+            window.alert('Invalid Chat please contact site administration if problem returns');
+           
+           //////////////////
+           
+        };
+
+        document.querySelector('#chat-message-input').onkeyup = function(e) {
+            if (e.keyCode === 13) {  // enter, return
+                document.querySelector('#chat-message-submit').click();
+            }
+        };
+
+        document.querySelector('#chat-message-submit').onclick = function(e) {
+            const messageInputDom = document.querySelector('#chat-message-input');
+            const message = messageInputDom.value;
+            chatSocket.send(JSON.stringify({
+                'message': message,
+                'command': 'new_message',
+                sender:user_name,
+                'chatId':chatID,
+            }));
+            messageInputDom.value = '';
+        };
+
+        
+
+        
+    </script>
+
+
+
+{% endblock%}

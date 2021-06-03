@@ -1,0 +1,29 @@
+{% extends "users/base.html" %}
+{% block content %}
+
+
+<table class="table table-striped">
+    
+<thead>
+    <tr>
+        <th scope="col">Name </th>
+        <th scope="col">  </th>
+        
+        
+    </tr>
+</thead>
+<tbody>
+{% for chat in chats %}
+<tr>
+    <td>{{chat.chatname}}</td>
+    <td><a class="btn" style="color:blue" href="{% url 'chat' chat_id=chat.chatid %}">Messaging</a></td>
+
+
+    
+    
+
+  </tr>
+{%endfor%}
+</tbody>
+</table>
+{%endblock%}
