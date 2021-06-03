@@ -59,6 +59,7 @@ urlpatterns = [
     path('Play_game/',game_views.Play_game,name='Play_game'),
     path('home/Teatcher_Edit_info/',user_views.Teatcher_Edit_info,name="Teatcher_Edit_info"),
     path('home/Kid_Edit_info/',user_views.Kid_Edit_info,name="Kid_Edit_info"),
+    path('',include('chat.urls')),
 
 
 ]
