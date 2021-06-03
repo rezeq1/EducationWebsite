@@ -34,6 +34,7 @@ class inpox:
         self.chatname=chatname
         self.unread=unread
 
+
 def teacher_inpox(req):
     chats=req.user.chats.all()
     user=req.user
@@ -55,6 +56,16 @@ def teacher_inpox(req):
         'chats':chatss
     })
 
+def parent_inpox(req):
+    chats=req.user.chats.all()
+    user=req.user
+    chatss=[]
+    for i in chats:
+        chatName=i.garten.name
+        chatss.append( inpox(i.id,chatName,0))
+    return render(req,'chat/chats.html',{
+        'chats':chatss
+    })
 
     
 
