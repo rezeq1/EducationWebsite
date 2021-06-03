@@ -5,7 +5,8 @@ from ..models import *
 
 
 class ViewsTestCase(TestCase):
-    def test_get_chats(self):
+
+    def test_teacher_inpox(self):
         t=Teacher(password='123456',username='teacer',first_name='user',last_name='last',email='email@email')
         c = Client()
         c.login(username='teacer', password='123456')
