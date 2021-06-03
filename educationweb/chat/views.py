@@ -34,7 +34,7 @@ class inpox:
         self.chatname=chatname
         self.unread=unread
 
-def get_chats(req):
+def teacher_inpox(req):
     chats=req.user.chats.all()
     user=req.user
     chatss=[]

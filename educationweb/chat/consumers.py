@@ -92,6 +92,9 @@ class ChatConsumer(WebsocketConsumer):
     # Receive message from room group
     def receive(self, text_data):
         data = json.loads(text_data)
+        message = data
+        if data["sender"] != self.scope["user"].username :
+            print(self.scope["user"],data["sender"])
         self.commands[data['command']](self, data)
 
     def send_chat_message(self, message):
@@ -104,11 +107,9 @@ class ChatConsumer(WebsocketConsumer):
         )
 
     def send_message(self, message):
-        print(message)
         self.send(text_data=json.dumps(message))
 
     def chat_message(self, event):
         message = event['message']
-        print(message)
-
+        
         self.send(text_data=json.dumps(message))
