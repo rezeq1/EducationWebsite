@@ -48,9 +48,16 @@ def home(req):
     
     kid=Kid.objects.filter(username=req.user.username).first()
     if kid:
+        
+        Garten=kid.garten
+        if Garten:
+            chat=Chat.objects.filter(garten=Garten).first() 
+        else:
+            chat = False
+        print(chat) 
         board=Board.objects.filter(garten=kid.garten).first()
         messages=BoardMessage.objects.filter(board=board).all()
-        return render(req,'users/kid_home.html',{'user':req.user,'parent':False,'teacher':False,'kid':True,'BoardMessages':messages})
+        return render(req,'users/kid_home.html',{'user':req.user,'parent':False,'teacher':False,'kid':True,'BoardMessages':messages,'chat':chat})
     
     teacher=Teacher.objects.filter(username=req.user.username).first()
     if teacher:

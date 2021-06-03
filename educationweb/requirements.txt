@@ -1,0 +1,10 @@
+channels==3.0.3
+channels-redis==3.2.0
+Django==3.2
+django-allauth==0.44.0
+django-cors-headers==3.7.0
+django-crispy-forms==1.11.2
+django-rest-auth==0.9.5
+django-rest-framework==0.1.0
+djangorestframework==3.12.4
+Pillow==6.2.0

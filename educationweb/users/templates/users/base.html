@@ -108,7 +108,9 @@
                       <li class="list-group-item list-group-item-light">  <a href="{% url 'show_homeworks_for_kid'%}">&#128218; Show homeworks</a> </li>
                       <li class="list-group-item list-group-item-light">  <a href="{% url 'Get_Kid_stories'%}">&#128213; Show stories</a> </li>
                       <li class="list-group-item list-group-item-light">  <a href="{% url 'Get_Kid_Musics'%}">&#x1F3BC; Play Music</a> </li>
-
+                      {%if chat %}
+                      <li class="list-group-item list-group-item-light">  <a href="{% url 'chat' chat_id=chat.id %}">&#x1F3BC; Talk with friends</a> </li>
+                      {%endif%}
                       <li class="list-group-item list-group-item-light">  <a href="{% url 'Play_game'%}"> &#127918; Play games </a> </li>
                       <li class="list-group-item list-group-item-light">  <a href="{% url 'Kid_Edit_info'%}">&#128260; Edit account information</a> </li>
                       <li class="list-group-item list-group-item-light">  <a href="{% url 'ChangePassword'%}">&#128274; Change my password</a> </li>

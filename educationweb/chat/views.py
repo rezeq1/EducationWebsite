@@ -1,3 +1,4 @@
+from users.models import Kindergarten, Teacher
 from django.core.checks import messages
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
@@ -35,11 +36,16 @@ class inpox:
 
 def get_chats(req):
     chats=req.user.chats.all()
-    parent=Parent.objects.filter(username=req.user.username).first()
     user=req.user
     chatss=[]
+    teacher=Teacher.objects.filter(username=user.username).first()
+    garten=Kindergarten.objects.filter(myTeacher=teacher).first()
+    try:
+        chat=Chat.objects.filter(garten=garten).first()
+    except :
+        chat=False
     for i in chats:
-        if (parent):
+        if (chat and i==chat):
             chatName=i.garten.name
         else:
             p=i.participants.filter(~Q(id=req.user.id)).first()
@@ -48,6 +54,8 @@ def get_chats(req):
     return render(req,'chat/chats.html',{
         'chats':chatss
     })
+
+
     
 
 def parent_contact(req,id):

@@ -14,7 +14,7 @@ class Chat(models.Model):
     participants = models.ManyToManyField(
         User, related_name='chats', blank=True)
     
-    garten=models.ForeignKey(Kindergarten,blank=True, null=True, on_delete=models.SET_NULL)
+    garten=models.ForeignKey(Kindergarten,related_name='chat',blank=True, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return "{}".format(self.pk)
