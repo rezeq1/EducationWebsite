@@ -51,6 +51,11 @@ pipeline {
                         }
 
                     stage('Test Trend Chart') {
+			   agent {
+                                docker {
+                                    image 'izaldal/django:izaldal2'
+                                }
+                            }
 			steps {
 				dir("educationweb") {
 					withEnv(["HOME=${env.WORKSPACE}"]) {
