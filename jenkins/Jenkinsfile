@@ -50,27 +50,18 @@ pipeline {
                             
                         }
 
-                    stage('pylint python code convention') {
-                            agent {
-                                docker {
-                                    image 'izaldal/django:izaldal2'
-                                }
-                            }
-                            steps {
-                                dir("educationweb/users") {
-                                        withEnv(["HOME=${env.WORKSPACE}"])
-					{
-						sh 'python -m pylint views.py'
-						sh "python -m pylint admin.py"
-						sh "python -m pylint apps.py"
-						sh "python -m pylint models.py"
-						sh "python -m pylint tests.py"
-						sh "python -m pylint forms.py"
+                    stage('Test Trend Chart') {
+			steps {
+				dir("educationweb") {
+					withEnv(["HOME=${env.WORKSPACE}"]) {
+						sh "python -m coverage run -a manage.py test"
 					}
-                                }
-                            }
-                            
-                        }
+				}
+				dir("educationweb") {
+					junit allowEmptyResults: true, testResults: 'test_reports/unittest.xml'
+				}
+			}
+		}
 
 
             }
