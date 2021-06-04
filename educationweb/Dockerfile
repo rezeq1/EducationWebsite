@@ -11,6 +11,7 @@ RUN pip install -r requirements.txt
 RUN pip install channels
 RUN pip install channels-redis
 RUN pip install coverage
+RUN pip install pylint
 
 RUN pip freeze
 COPY . /code
