@@ -10,7 +10,7 @@ RUN pip install -r requirements.txt
 
 RUN pip install channels
 RUN pip install channels-redis
-
+RUN pip install coverage
 
 RUN pip freeze
 COPY . /code
