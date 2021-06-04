@@ -51,7 +51,7 @@ stage('Test') {
         }
 
 
-    
+}
 
     	post {
 		failure{
