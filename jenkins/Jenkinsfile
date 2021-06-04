@@ -34,7 +34,7 @@ stage('Test') {
 
     }
 
-    stage('unit test coverage') {
+    stage('unit test coverage   ') {
             agent {
                 docker {
                     image 'izaldal/django:izaldal'
