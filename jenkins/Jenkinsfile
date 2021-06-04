@@ -1,57 +1,57 @@
 pipeline {
     agent none
     stages {
-stage('Test') {
-            agent {
-                docker {
-                    image 'izaldal/django:izaldal'
-                }
-            }
-            steps {
-                dir("educationweb") {
-                
-                        sh 'ls'
-                        sh 'python manage.py test --keepdb'
-                }
-            }
-            
-        }
- stage('Integration Test') {
-            agent {
-                docker {
-                    image 'izaldal/django:izaldal'
-                }
-            }
-            steps {
-                dir("educationweb") {
-                        
-                        sh 'python manage.py test kindergarten.tests.test_integration --keepdb'
-                }
-            }
-            
-        }
+                stage('Test') {
+                            agent {
+                                docker {
+                                    image 'izaldal/django:izaldal'
+                                }
+                            }
+                            steps {
+                                dir("educationweb") {
+                                
+                                        sh 'ls'
+                                        sh 'python manage.py test --keepdb'
+                                }
+                            }
+                            
+                        }
+                stage('Integration Test') {
+                            agent {
+                                docker {
+                                    image 'izaldal/django:izaldal'
+                                }
+                            }
+                            steps {
+                                dir("educationweb") {
+                                        
+                                        sh 'python manage.py test kindergarten.tests.test_integration --keepdb'
+                                }
+                            }
+                            
+                        }
 
 
-    }
+                    
 
-    stage('unit test coverage   ') {
-            agent {
-                docker {
-                    image 'izaldal/django:izaldal'
-                }
+                    stage('unit test coverage') {
+                            agent {
+                                docker {
+                                    image 'izaldal/django:izaldal'
+                                }
+                            }
+                            steps {
+                                dir("educationweb") {
+                                        
+                                        sh 'python -m coverage run manage.py test'
+                                        sh 'python -m coverage report'
+                                }
+                            }
+                            
+                        }
+
+
             }
-            steps {
-                dir("educationweb") {
-                        
-                        sh 'python -m coverage run manage.py test'
-                        sh 'python -m coverage report'
-                }
-            }
-            
-        }
-
-
-}
 
     	post {
 		failure{
