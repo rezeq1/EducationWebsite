@@ -11,6 +11,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'users\bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'users\style.css' %}">
     {% if title%}
     <title>{{title}}</title>
     {% endif %}</head>
@@ -69,18 +70,18 @@
                 <ul class="list-group">
                     
                       {% if ans.0 %}
-                      <li class="list-group-item list-group-item-light">     <a href="delete_parent">&#128465;&#65039; remove  account</a></li>
-                      </li>
-                      <li class="list-group-item list-group-item-light">    <a href="{% url 'parent_inpox'%}">&#128274; Inpox</a> </li>
+                   
+                      <li class="list-group-item list-group-item-light">    <a href="{% url 'parent_inpox'%}"><i class="fa fa-inbox"></i> Inpox</a> </li>
 
-                      <li class="list-group-item list-group-item-light">    <a href="{% url 'get_kids_teachers'%}">&#128274; Start Chat</a> </li>
+                      <li class="list-group-item list-group-item-light">    <a href="{% url 'get_kids_teachers'%}"><i class="fa fa-comment-o"></i> Start Chat</a> </li>
 
                       <li class="list-group-item list-group-item-light">    <a href="{% url 'kid_register'%}">&#10133; Add a Kid</a> </li>
 
                       <li class="list-group-item list-group-item-light">    <a href="{% url 'show_kids'%}">&#128187; Show my kids</a> </li>
                       
                       <li class="list-group-item list-group-item-light">    <a href="{% url 'ChangePassword'%}">&#128274; Change my password</a> </li>
-
+                      <li class="list-group-item list-group-item-light">     <a href="delete_parent">&#128465;&#65039; remove  account</a></li>
+                      </li>
 
                       {%endif%}
 
@@ -88,7 +89,7 @@
                         {% if ans.3 %}
                         <li class="list-group-item list-group-item-light">     <h6> Your Kindergarten name : {{ans.3}}</h6> </li>
                         <li class="list-group-item list-group-item-light">  <a href="{% url 'home'%}">&#x2709; Message board </a> </li>
-                        <li class="list-group-item list-group-item-light">    <a href="{% url 'teacher_inpox'%}">&#128274; Inpox</a> </li>
+                        <li class="list-group-item list-group-item-light">    <a href="{% url 'teacher_inpox'%}"><i class="fa fa-inbox"></i> Inpox</a> </li>
                 
                         <li class="list-group-item list-group-item-light"> <a href="{% url 'show_kindergarten_kids'%}">&#128187; Show Kindergarten's kids</a> </li>
                         <li class="list-group-item list-group-item-light">  <a href="{% url 'KinderGartenHome'%}">&#127909; Show  lessons & stories</a> </li>
@@ -103,14 +104,14 @@
 
                   {%endif%}
                   {%if ans.2 %}
+                      {%if chat %}
+                      <li class="list-group-item list-group-item-light">  <a href="{% url 'chat' chat_id=chat.id %}"><i class="fa fa-comment-o"></i> Talk with friends</a> </li>
+                      {%endif%}
                       <li class="list-group-item list-group-item-light">  <a href="{% url 'home'%}">&#x2709; Message board </a> </li>
                       <li class="list-group-item list-group-item-light">  <a href="{% url 'kindergarten_activites'%}">&#127909; Show  lessons</a> </li>
                       <li class="list-group-item list-group-item-light">  <a href="{% url 'show_homeworks_for_kid'%}">&#128218; Show homeworks</a> </li>
                       <li class="list-group-item list-group-item-light">  <a href="{% url 'Get_Kid_stories'%}">&#128213; Show stories</a> </li>
                       <li class="list-group-item list-group-item-light">  <a href="{% url 'Get_Kid_Musics'%}">&#x1F3BC; Play Music</a> </li>
-                      {%if chat %}
-                      <li class="list-group-item list-group-item-light">  <a href="{% url 'chat' chat_id=chat.id %}">&#x1F3BC; Talk with friends</a> </li>
-                      {%endif%}
                       <li class="list-group-item list-group-item-light">  <a href="{% url 'Play_game'%}"> &#127918; Play games </a> </li>
                       <li class="list-group-item list-group-item-light">  <a href="{% url 'Kid_Edit_info'%}">&#128260; Edit account information</a> </li>
                       <li class="list-group-item list-group-item-light">  <a href="{% url 'ChangePassword'%}">&#128274; Change my password</a> </li>
@@ -125,6 +126,7 @@
         </div>
       </main>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 

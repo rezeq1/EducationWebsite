@@ -178,7 +178,7 @@
 
         chatSocket.onclose = function(e) {
             window.alert('Invalid Chat please contact site administration if problem returns');
-           
+           window.location = "{% url 'home' %}"
            //////////////////
            
         };

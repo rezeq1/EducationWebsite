@@ -3,26 +3,33 @@
 
 <div class="content-section">
 
-<table class="table table-striped">
-    
-<thead>
-    <tr>
-        <th scope="col">Music title </th>
-        <th scope="col"></th>
-    </tr>
-</thead>
-{% for music in musics %}
-<tr>
-    <td>{{music.title}}</td>
+<div class="directory-info-row">
+        {% for music in musics %}
 
-    <td><audio src="{{music.music_file.url}}" controls>
-</audio></td>
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="media">
+                            <a class="pull-left" href="#">
+                                <img class="thumb media-object" src="/media/games/music-note.svg" alt="" />
+                            </a>
+                            <div class="media-body">
+                                <h4>{{music.title}}</h4>
+                                <audio class="button" src="{{music.music_file.url}}" controls></audio>
 
-   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-  </tr>
-{%endfor%}
-</tbody>
-</table>
+        </div>
+
+        <br>
+        <br>
+        <br>
+    {%endfor%}
+    </div>
 </div>
 {%endblock%}
