@@ -50,6 +50,22 @@ pipeline {
                             
                         }
 
+                    stage('pylint python code convention') {
+                            agent {
+                                docker {
+                                    image 'izaldal/django:izaldal'
+                                }
+                            }
+                            steps {
+                                dir("educationweb") {
+                                        
+                                        sh 'python -m pylint chat users educationweb kindergarten games'
+                                        
+                                }
+                            }
+                            
+                        }
+
 
             }
 
