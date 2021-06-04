@@ -59,7 +59,7 @@ pipeline {
                             steps {
                                 dir("educationweb") {
                                         
-                                        sh 'python -m pylint chat users educationweb kindergarten games'
+                                        sh 'python -m pylint users/views.py chat/views.py kindergarten/views.py games/views.py'
                                         
                                 }
                             }
